@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -113,6 +114,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Idle\ColorBlue\Idle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\redacted\body.png" />
+    <Resource Include="Images\redacted\head.png" />
+    <Resource Include="Images\redacted\legs.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

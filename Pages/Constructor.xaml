@@ -106,12 +106,12 @@
 
 
         
-        <Image Grid.Column="1" Grid.Row="1" Name="Head"
+        <Image Grid.Column="1" 
+               Grid.Row="1" 
+               Grid.RowSpan="3"
+               Name="Char"
                RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-        <Image Grid.Column="1" Grid.Row="2" Name="Body"
-               RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-        <Image Grid.Column="1" Grid.Row="3" Name="Legs"
-               RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+
 
 
 

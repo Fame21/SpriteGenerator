@@ -35,5 +35,10 @@ namespace SpriteGenerator
         {
             Main.Content = new Pages.Constructor();
         }
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Pages.SavedSprites();
+        }
     }
 }

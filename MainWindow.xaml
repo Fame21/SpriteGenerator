@@ -45,7 +45,7 @@
                 <RadioButton Content="Saved"
                              Height="50"
                              Foreground="White"
-                             FontSize="14"/>
+                             FontSize="14" Click="RadioButton_Click"/>
                 <RadioButton Content="Settings"
                              Height="50"
                              Foreground="White"

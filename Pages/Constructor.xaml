@@ -22,9 +22,11 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="SpriteName"
+                   Name="SpriteName"
                    Grid.Column="1"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
@@ -73,8 +75,8 @@
                      Content="4"
                      VerticalContentAlignment="Center"
                      Foreground="White"
-                     HorizontalAlignment="Center"
                      Cursor="Hand"
+                     HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      FontSize="50"
                      FontFamily="Marlett"
@@ -85,8 +87,8 @@
                      Content="4"
                      VerticalContentAlignment="Center"
                      Foreground="White"
-                     HorizontalAlignment="Center"
                      Cursor="Hand"
+                     HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      FontSize="50"
                      FontFamily="Marlett"
@@ -98,7 +100,7 @@
                      VerticalContentAlignment="Center"
                      Cursor="Hand"
                      Foreground="White"
-                     HorizontalAlignment="Center"
+                     HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      FontSize="50"
                      FontFamily="Marlett"
@@ -112,6 +114,19 @@
                Name="Char"
                RenderOptions.BitmapScalingMode="NearestNeighbor"/>
 
+        <RadioButton Grid.Row="4" 
+                     Grid.Column="0" 
+                     Grid.ColumnSpan="3"
+                     Content="Save sprite"
+                     Cursor="Hand"
+                     Foreground="White"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     FontSize="50"
+                     FontWeight="Bold"
+                     Margin="0 0 25 0" Click="SaveSprite"/>
 
 
 

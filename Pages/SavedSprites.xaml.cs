@@ -1,22 +1,19 @@
-﻿using Microsoft.Win32;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
+using System.Web.Script.Serialization;
 
 namespace SpriteGenerator.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Constructor.xaml
+    /// Логика взаимодействия для SavedSprites.xaml
     /// </summary>
-    public partial class Constructor : Page
+    public partial class SavedSprites : Page
     {
         //head
         int headX = 1;
@@ -40,14 +37,17 @@ namespace SpriteGenerator.Pages
         BitmapImage body = new BitmapImage(new Uri("../../Images/redacted/body.png", UriKind.Relative));
         BitmapImage legs = new BitmapImage(new Uri("../../Images/redacted/legs.png", UriKind.Relative));
 
+        int pageIdx = 1;
+        int pageCount = 1;
 
-        public Constructor()
+        public SavedSprites()
         {
             InitializeComponent();
-            update();
+            loadPage();
         }
 
-        private WriteableBitmap mergeParts()
+
+        private WriteableBitmap mergeParts(int headIdx, int bodyIdx, int legsIdx)
         {
             WriteableBitmap amalgam = new WriteableBitmap(
                 27, // width
@@ -56,6 +56,10 @@ namespace SpriteGenerator.Pages
                 96, // dpiY
                 PixelFormats.Bgra32, // pixel format
                 null); // bitmap pallete
+
+            GetHead(headIdx);
+            GetBody(bodyIdx);
+            GetLegs(legsIdx);
 
             BitmapSource headSource = new CroppedBitmap(head, new Int32Rect(headX, headY, headWidth, headHeight));
             BitmapSource bodySource = new CroppedBitmap(body, new Int32Rect(bodyX, bodyY, bodyWidth, bodyHeight));
@@ -142,121 +146,94 @@ namespace SpriteGenerator.Pages
 
             return pixels;
         }
-        
 
-        private void update()
+
+        private void GetLegs(int num = 0)
         {
-            WriteableBitmap amalgam = mergeParts();
-            Char.Source = amalgam;
+            legsX = 1;
+            legsX = legsX + (legsWidth + 1) * num;
+            legsX = legsX % (legs.PixelWidth - 1);
+        }
+        private void GetBody(int num = 0)
+        {
+            bodyX = 1;
+            bodyX += (bodyWidth + 1) * num;
+            bodyX = bodyX % (body.PixelWidth - 1);
+        }
+        private void GetHead(int num = 0)
+        {
+            headX = 1;
+            headX += (headWidth + 1) * num;
+            headX = headX % (head.PixelWidth - 1);
         }
 
 
-        // Saving sprite
 
-        private void SaveSprite(object sender, RoutedEventArgs e)
+        private void loadPage(int page = 1)
         {
-            string fileName = SpriteName.Text + ".png";
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string savingPath = Path.Combine(desktopPath, fileName);
-
-            savingPath = GetNextFileName(savingPath);
-
-            var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)Char.Source));
-            //using (FileStream stream = new FileStream(savingPath, FileMode.Create))
-            //    encoder.Save(stream);
-
             string jsonPath = "../../SavedSprites/Saved.JSON";
-            if (!File.Exists(jsonPath))
+            string jsonData = "";
+            if (File.Exists(jsonPath))
             {
-                File.Create(jsonPath);
-            }
-
-            if (File.ReadAllText(jsonPath) == "")
+                if (File.ReadAllText(jsonPath) == "")
+                {
+                    return;
+                } else
+                {
+                    jsonData = JsonConvert.DeserializeObject(File.ReadAllText(jsonPath)).ToString();
+                }
+                
+            } 
+            else
             {
                 return;
             }
-            else
+
+
+            dynamic jss = new JavaScriptSerializer();
+
+            
+            dynamic data = jss.Deserialize<dynamic>(jsonData);
+
+            pageCount = (data.Count / 15) + 1;
+            int lastPageCount = data.Count % 15;
+            for (int i = 0; i < 15; i++)
             {
-                string json = File.ReadAllText(jsonPath);
-                dynamic jss = new JavaScriptSerializer();
-                dynamic jsonObj = JsonConvert.DeserializeObject(json);
-                dynamic data = jss.Deserialize<dynamic>(jsonObj.ToString());
-
-                var spriteData = new Dictionary<string, object>();
-                spriteData["name"] = SpriteName.Text;
-                spriteData["parts"] = new int[3] { 1, 2, 3 };
-                jsonObj["sprite" + (data.Count)] = JsonConvert.SerializeObject(spriteData);
-                string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
-
-                output = output.Replace("\\", "");
-                output = output.Replace("\"{", "{");
-                output = output.Replace("}\"", "}");
-                File.WriteAllText(jsonPath, output);
+                string picIdx = "Pic" + (i + 1);
+                string nameIdx = "Name" + (i + 1);
+                var myTextBlock = (TextBlock)this.FindName(nameIdx);
+                myTextBlock.Text = "Empty";
+                var myImgBlock = (Image)this.FindName(picIdx);
+                myImgBlock.Source = null;
             }
 
 
+            var ifNotLast = pageCount * (page * (pageCount - page)) / (pageCount - 1) - (page * (pageCount - page));
+            var ifLast = 1 - ifNotLast;
 
-
-
-
-        }
-
-        private string GetNextFileName(string fileName)
-        {
-            string extension = Path.GetExtension(fileName);
-            string pathName = Path.GetDirectoryName(fileName);
-            string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(fileName));
-            int i = 0;
-            // If the file exists, keep trying until it doesn't
-            while (File.Exists(fileName))
+            for (int i = 0; i < (15 * ifNotLast) + lastPageCount * (ifLast); i++)
             {
-                i += 1;
-                fileName = string.Format("{0}({1}){2}", fileNameOnly, i, extension);
+                string spriteIdx = "sprite" + (i + (page-1) * 15);
+                string picIdx = "Pic" + (i + 1);
+                string nameIdx = "Name" + (i + 1);
+
+                string nameText = data[spriteIdx]["name"];
+                dynamic partsList = data[spriteIdx]["parts"];
+
+                WriteableBitmap amalgam = mergeParts(partsList[0], partsList[1], partsList[2]);
+                var myTextBlock = (TextBlock)this.FindName(nameIdx);
+                myTextBlock.Text = nameText;
+                var myImgBlock = (Image)this.FindName(picIdx);
+                myImgBlock.Source = amalgam;
             }
-            return fileName;
         }
-        // Next/prev buttons
-        private void NextHead(object sender, RoutedEventArgs e)
+        
+        private void NextPage(object sender, RoutedEventArgs e)
         {
-            headX += headWidth + 1;
-            headX = headX % (head.PixelWidth - 1);
-            update();
-        }
-
-        private void NextBody(object sender, RoutedEventArgs e)
-        {
-            bodyX += bodyWidth + 1;
-            bodyX = bodyX % (body.PixelWidth - 1);
-            update();
-        }
-
-        private void NextLegs(object sender, RoutedEventArgs e)
-        {
-            legsX += legsWidth + 1;
-            legsX = legsX % (legs.PixelWidth - 1);
-            update();
-        }
-
-        private void PrevLegs(object sender, RoutedEventArgs e)
-        {
-            legsX -= legsWidth + 1;
-            legsX = (legsX + legs.PixelWidth - 1) % (legs.PixelWidth - 1);
-            update();
-        }
-
-        private void PrevBody(object sender, RoutedEventArgs e)
-        {
-            bodyX -= bodyWidth + 1;
-            bodyX = (bodyX + body.PixelWidth - 1) % (body.PixelWidth - 1);
-            update();
-        }
-
-        private void PrevHead(object sender, RoutedEventArgs e)
-        {
-            headX -= headWidth + 1;
-            headX = (headX + head.PixelWidth - 1) % (head.PixelWidth - 1);
-            update();
+            pageIdx++;
+            PageNum.Text = "Page: " + pageIdx;
+            loadPage(pageIdx);
+            pageIdx = (pageIdx % (pageCount));
         }
     }
 }

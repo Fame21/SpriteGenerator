@@ -11,241 +11,121 @@
     "name": "SpriteName",
     "parts": [
       1,
-      2,
-      3
+      1,
+      0
     ]
   },
   "sprite2": {
     "name": "SpriteName",
     "parts": [
+      0,
       1,
-      2,
-      3
+      1
     ]
   },
   "sprite3": {
     "name": "SpriteName",
     "parts": [
+      3,
       1,
-      2,
-      3
+      0
     ]
   },
   "sprite4": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      7,
+      6
     ]
   },
   "sprite5": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      7,
+      7,
+      6
     ]
   },
   "sprite6": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite7": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite8": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite9": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite10": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite11": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite12": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite13": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite14": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
   "sprite15": {
     "name": "SpriteName",
     "parts": [
-      1,
-      2,
-      3
+      0,
+      0,
+      0
     ]
   },
-  "sprite16": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite17": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite18": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite19": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite20": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite21": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite22": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite23": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite24": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite25": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite26": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite27": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite28": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite29": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite30": {
-    "name": "SpriteName",
-    "parts": [
-      1,
-      2,
-      3
-    ]
-  },
-  "sprite31": {"name":"SpriteName","parts":[1,2,3]}
+  "sprite16": {"name":"SpriteName","parts":[0,0,0]}
 }

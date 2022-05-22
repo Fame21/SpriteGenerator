@@ -207,11 +207,27 @@ namespace SpriteGenerator.Pages
                 myImgBlock.Source = null;
             }
 
+            int divisor = pageCount - 1;
+            int border = 0;
+            if (pageCount == 1)
+            {
+                divisor++;
+                border = lastPageCount;
+                NextPageBtn.IsEnabled = false;
+                PrevPageBtn.IsEnabled = false;
+            } 
+            else
+            {
+                int reduced = page * (pageCount - page);
+                var ifNotLast = pageCount * reduced / divisor - reduced;
+                var ifLast = 1 - ifNotLast;
+                border = (15 * ifNotLast) + lastPageCount * (ifLast);
+                NextPageBtn.IsEnabled = true;
+                PrevPageBtn.IsEnabled = true;
+            }
 
-            var ifNotLast = pageCount * (page * (pageCount - page)) / (pageCount - 1) - (page * (pageCount - page));
-            var ifLast = 1 - ifNotLast;
 
-            for (int i = 0; i < (15 * ifNotLast) + lastPageCount * (ifLast); i++)
+            for (int i = 0; i < border; i++)
             {
                 string spriteIdx = "sprite" + (i + (page-1) * 15);
                 string picIdx = "Pic" + (i + 1);
@@ -231,9 +247,18 @@ namespace SpriteGenerator.Pages
         private void NextPage(object sender, RoutedEventArgs e)
         {
             pageIdx++;
-            PageNum.Text = "Page: " + pageIdx;
             loadPage(pageIdx);
-            pageIdx = (pageIdx % (pageCount));
+            pageIdx = pageIdx % pageCount;
+            PageNum.Text = "Page: " + pageIdx;
+        }
+
+
+        private void PrevPage(object sender, RoutedEventArgs e)
+        {
+            pageIdx--;
+            pageIdx = ((pageIdx + pageCount) % pageCount);
+            loadPage(pageIdx);
+            PageNum.Text = "Page: " + pageIdx;
         }
     }
 }

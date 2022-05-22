@@ -123,9 +123,6 @@ namespace SpriteGenerator.Pages
                 }
             }
 
-            //amalgam.WritePixels(new Int32Rect(6, 31, 15, 17), legsPixels, legsSource.PixelWidth * (legsSource.Format.BitsPerPixel / 8), 0);
-            //amalgam.WritePixels(new Int32Rect(1, 1, 25, 22), headPixels, headSource.PixelWidth * (headSource.Format.BitsPerPixel / 8), 0);
-            //amalgam.WritePixels(new Int32Rect(1, 18, 25, 22), bodyPixels, bodySource.PixelWidth * (bodySource.Format.BitsPerPixel / 8), 0);
 
             amalgam.WritePixels(new Int32Rect(0, 0, 27, 49), amalgamPixels, amalgam.PixelWidth * (amalgam.Format.BitsPerPixel / 8), 0);
 
@@ -185,7 +182,12 @@ namespace SpriteGenerator.Pages
 
                 var spriteData = new Dictionary<string, object>();
                 spriteData["name"] = SpriteName.Text;
-                spriteData["parts"] = new int[3] { 1, 2, 3 };
+
+                int headIdx = headX / headWidth;
+                int bodyIdx = bodyX / bodyWidth;
+                int legsIdx = legsX / legsWidth;
+
+                spriteData["parts"] = new int[3] { headIdx, bodyIdx, legsIdx };
                 jsonObj["sprite" + (data.Count)] = JsonConvert.SerializeObject(spriteData);
                 string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
 

@@ -18,115 +18,132 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="75"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="SpriteName"
-                   Name="SpriteName"
-                   Grid.Column="1"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Foreground="White"
-                   FontSize="30"
-                   FontWeight="Bold"/>
+        <TextBox 
+                BorderThickness="0"
+                Text="SpriteName"
+                Name="SpriteName"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Foreground="White"
+                Background="Transparent"
+                MinWidth="200"
+                TextAlignment="Center"
+                FontSize="30"
+                FontWeight="Bold"/>
 
 
         <!-- Head Left -->
-        <RadioButton Grid.Row="1" 
-                     Cursor="Hand"
-                     Grid.Column="0" 
-                     Content="3"
-                     VerticalContentAlignment="Center"
-                     Foreground="White"
-                     HorizontalContentAlignment="Center"
-                     FontSize="50"
-                     FontFamily="Marlett"
-                     Margin="0 0 25 0" Click="PrevHead"/>
+        <Button Grid.Row="1" 
+                Cursor="Hand"
+                Grid.Column="0" 
+                Content="3"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Foreground="White"
+                HorizontalContentAlignment="Center"
+                FontSize="50"
+                FontFamily="Marlett"
+                Click="PrevHead"/>
         <!-- Body Left -->
-        <RadioButton Grid.Row="2" 
-                     Grid.Column="0" 
-                     Content="3"
-                     VerticalContentAlignment="Center"
-                     Foreground="White"
-                     Cursor="Hand"
-                     Margin="0 0 25 0"
-                     FontSize="50"
-                     FontFamily="Marlett" Click="PrevBody"/>
+        <Button Grid.Row="2" 
+                Grid.Column="0" 
+                Content="3"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Foreground="White"
+                Cursor="Hand"
+                FontSize="50"
+                FontFamily="Marlett" Click="PrevBody"/>
 
         <!-- Legs Left -->
-        <RadioButton Grid.Row="3" 
-                     Grid.Column="0" 
-                     Content="3"
-                     VerticalContentAlignment="Center"
-                     Foreground="White"
-                     Cursor="Hand"
-                     FontSize="50"
-                     FontFamily="Marlett"
-                     Margin="0 0 25 0" Click="PrevLegs"/>
-        
-        
+        <Button Grid.Row="3" 
+                Grid.Column="0" 
+                Content="3"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Foreground="White"
+                Cursor="Hand"
+                FontSize="50"
+                FontFamily="Marlett"
+                Click="PrevLegs"/>
+
+
         <!-- Head Right -->
-        <RadioButton Grid.Row="1" 
-                     Grid.Column="2" 
-                     Content="4"
-                     VerticalContentAlignment="Center"
-                     Foreground="White"
-                     Cursor="Hand"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     FontSize="50"
-                     FontFamily="Marlett"
-                     Margin="0 0 25 0" Click="NextHead"/>
+        <Button Grid.Row="1" 
+                Grid.Column="2" 
+                Content="4"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Foreground="White"
+                Cursor="Hand"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                FontSize="50"
+                FontFamily="Marlett" 
+                Click="NextHead"/>
         <!-- Body Right -->
-        <RadioButton Grid.Row="2" 
-                     Grid.Column="2" 
-                     Content="4"
-                     VerticalContentAlignment="Center"
-                     Foreground="White"
-                     Cursor="Hand"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     FontSize="50"
-                     FontFamily="Marlett"
-                     Margin="0 0 25 0" Click="NextBody"/>
+        <Button Grid.Row="2" 
+                Grid.Column="2" 
+                Content="4"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Foreground="White"
+                Cursor="Hand"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                FontSize="50"
+                FontFamily="Marlett"
+                Click="NextBody"/>
         <!-- Legs Right -->
-        <RadioButton Grid.Row="3" 
-                     Grid.Column="2" 
-                     Content="4"
-                     VerticalContentAlignment="Center"
-                     Cursor="Hand"
-                     Foreground="White"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     FontSize="50"
-                     FontFamily="Marlett"
-                     Margin="0 0 25 0" Click="NextLegs"/>
+        <Button Grid.Row="3" 
+                Grid.Column="2" 
+                Content="4"
+                VerticalContentAlignment="Center"
+                Cursor="Hand"
+                Background="Transparent"
+                BorderThickness="0"
+                Foreground="White"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                FontSize="50"
+                FontFamily="Marlett"
+                Click="NextLegs"/>
 
 
-        
+
         <Image Grid.Column="1" 
                Grid.Row="1" 
                Grid.RowSpan="3"
                Name="Char"
                RenderOptions.BitmapScalingMode="NearestNeighbor"/>
 
-        <RadioButton Grid.Row="4" 
-                     Grid.Column="0" 
-                     Grid.ColumnSpan="3"
-                     Content="Save sprite"
-                     Cursor="Hand"
-                     Foreground="White"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     FontSize="50"
-                     FontWeight="Bold"
-                     Margin="0 0 25 0" Click="SaveSprite"/>
+        <Button Grid.Row="4" 
+                Grid.Column="1"
+                Content="Сохранить спрайт"
+                Cursor="Hand"
+                Background="#151525"
+                BorderThickness="0"
+                Foreground="White"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                FontSize="30"
+                FontWeight="Bold"
+                Click="SaveSprite"/>
 
 
 

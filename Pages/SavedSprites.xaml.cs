@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Web.Script.Serialization;
+using System.Windows.Input;
 
 namespace SpriteGenerator.Pages
 {
@@ -202,7 +203,7 @@ namespace SpriteGenerator.Pages
                 string picIdx = "Pic" + (i + 1);
                 string nameIdx = "Name" + (i + 1);
                 var myTextBlock = (TextBlock)this.FindName(nameIdx);
-                myTextBlock.Text = "Empty";
+                myTextBlock.Text = "Пусто";
                 var myImgBlock = (Image)this.FindName(picIdx);
                 myImgBlock.Source = null;
             }
@@ -215,6 +216,8 @@ namespace SpriteGenerator.Pages
                 border = lastPageCount;
                 NextPageBtn.IsEnabled = false;
                 PrevPageBtn.IsEnabled = false;
+                PrevPageBtn.Background = new SolidColorBrush(Colors.Transparent);
+                NextPageBtn.Background = new SolidColorBrush(Colors.Transparent);
             } 
             else
             {
@@ -244,21 +247,90 @@ namespace SpriteGenerator.Pages
             }
         }
         
+        
+
+        private Border selected = null;
+        private void UnselectSprite()
+        {
+            if (selected != null)
+            {
+                selected.BorderBrush = Brushes.Transparent;
+            }
+            selected = null;
+        }
+        private void SelectSprite(object sender, MouseEventArgs e)
+        {
+            UnselectSprite();
+            selected = (Border)sender;
+            ((Border)sender).BorderBrush = Brushes.White;
+            //((Image)sender)
+        }
+
+        private void SaveSprite(string spriteName, Image spriteImage)
+        {
+            string fileName = spriteName + ".png";
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string savingPath = Path.Combine(desktopPath, fileName);
+
+            savingPath = GetNextFileName(savingPath);
+
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)spriteImage.Source));
+            try
+            {
+                using (FileStream stream = new FileStream(savingPath, FileMode.Create))
+                    encoder.Save(stream);
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            
+        }
+
+        private string GetNextFileName(string fileName)
+        {
+            string extension = Path.GetExtension(fileName);
+            string pathName = Path.GetDirectoryName(fileName);
+            string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(fileName));
+            int i = 0;
+            // If the file exists, keep trying until it doesn't
+            while (File.Exists(fileName))
+            {
+                i += 1;
+                fileName = string.Format("{0}({1}){2}", fileNameOnly, i, extension);
+            }
+            return fileName;
+        }
+
+        private void SaveSelectedSprite(object sender, RoutedEventArgs e)
+        {
+            if (selected == null)
+            {
+                return;
+            }
+            string idx = selected.Name.Substring(6);
+            string name = ((TextBlock)this.FindName("Name" + idx)).Text;
+            Image image = (Image)this.FindName("Pic" + idx);
+            SaveSprite(name, image);
+        }
+
         private void NextPage(object sender, RoutedEventArgs e)
         {
-            pageIdx++;
+            UnselectSprite();
+            pageIdx = ((pageIdx++) % pageCount) + 1;
             loadPage(pageIdx);
-            pageIdx = pageIdx % pageCount;
-            PageNum.Text = "Page: " + pageIdx;
+            PageNum.Text = "Страница: " + pageIdx;
         }
 
 
         private void PrevPage(object sender, RoutedEventArgs e)
         {
-            pageIdx--;
-            pageIdx = ((pageIdx + pageCount) % pageCount);
+            UnselectSprite();
+            pageIdx = (((pageIdx-- + pageCount) % pageCount)) + 1;
             loadPage(pageIdx);
-            PageNum.Text = "Page: " + pageIdx;
+            PageNum.Text = "Страница: " + pageIdx;
         }
+
     }
 }

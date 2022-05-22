@@ -1,9 +1,8 @@
-﻿using Microsoft.Win32;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
@@ -131,7 +130,6 @@ namespace SpriteGenerator.Pages
 
         private byte[] BitmapSourceToArray(BitmapSource bitmapSource)
         {
-            // Stride = (width) x (bytes per pixel)
             int stride = (int)bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
             byte[] pixels = new byte[(int)bitmapSource.PixelHeight * stride];
 
@@ -152,6 +150,7 @@ namespace SpriteGenerator.Pages
 
         private void SaveSprite(object sender, RoutedEventArgs e)
         {
+            
             string fileName = SpriteName.Text + ".png";
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string savingPath = Path.Combine(desktopPath, fileName);
@@ -160,13 +159,31 @@ namespace SpriteGenerator.Pages
 
             var encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create((BitmapSource)Char.Source));
-            //using (FileStream stream = new FileStream(savingPath, FileMode.Create))
-            //    encoder.Save(stream);
+
+            try
+            {
+                using (FileStream stream = new FileStream(savingPath, FileMode.Create))
+                    encoder.Save(stream);
+            }
+            catch (Exception exeption)
+            {
+                MessageBox.Show(exeption.Message);
+                return;
+            }
+
+            
 
             string jsonPath = "../../SavedSprites/Saved.JSON";
             if (!File.Exists(jsonPath))
             {
-                File.Create(jsonPath);
+                try
+                {
+                    File.Create(jsonPath);
+                }
+                catch (Exception exeption)
+                {
+                    MessageBox.Show(exeption.Message);
+                }
             }
 
             if (File.ReadAllText(jsonPath) == "")
@@ -196,12 +213,6 @@ namespace SpriteGenerator.Pages
                 output = output.Replace("}\"", "}");
                 File.WriteAllText(jsonPath, output);
             }
-
-
-
-
-
-
         }
 
         private string GetNextFileName(string fileName)

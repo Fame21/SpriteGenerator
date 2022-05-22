@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SpriteGenerator
 {
@@ -22,23 +11,25 @@ namespace SpriteGenerator
     {
         public MainWindow()
         {
+            RadioButton radioButton = new RadioButton();
             InitializeComponent();
             Main.Content = new Pages.Constructor();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void BtnClickConstructor(object sender, RoutedEventArgs e)
         {
             Main.Content = new Pages.Constructor();
+            var bc = new BrushConverter();
+            BtnConstructor.Background = (Brush)(bc.ConvertFrom("#151525"));
+            BtnSaved.Background = (Brush)(bc.ConvertFrom("#252540"));
         }
 
-        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        private void BtnClickSaved(object sender, RoutedEventArgs e)
         {
             Main.Content = new Pages.SavedSprites();
+            var bc = new BrushConverter();
+            BtnSaved.Background = (Brush)(bc.ConvertFrom("#151525"));
+            BtnConstructor.Background = (Brush)(bc.ConvertFrom("#252540"));
         }
     }
 }

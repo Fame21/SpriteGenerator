@@ -43,10 +43,10 @@ namespace SpriteGenerator.Pages
         public Constructor()
         {
             InitializeComponent();
-            update();
+            Update();
         }
 
-        private WriteableBitmap mergeParts()
+        private WriteableBitmap MergeParts()
         {
             WriteableBitmap amalgam = new WriteableBitmap(
                 27, // width
@@ -124,7 +124,7 @@ namespace SpriteGenerator.Pages
 
 
             amalgam.WritePixels(new Int32Rect(0, 0, 27, 49), amalgamPixels, amalgam.PixelWidth * (amalgam.Format.BitsPerPixel / 8), 0);
-
+            Console.WriteLine(amalgam.GetType());
             return amalgam;
         }
 
@@ -132,25 +132,22 @@ namespace SpriteGenerator.Pages
         {
             int stride = (int)bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
             byte[] pixels = new byte[(int)bitmapSource.PixelHeight * stride];
-
             bitmapSource.CopyPixels(pixels, stride, 0);
-
             return pixels;
         }
         
 
-        private void update()
+        private void Update()
         {
-            WriteableBitmap amalgam = mergeParts();
+            WriteableBitmap amalgam = MergeParts();
             Char.Source = amalgam;
         }
 
 
         // Saving sprite
 
-        private void SaveSprite(object sender, RoutedEventArgs e)
+        private void ExportSprite(object sender, RoutedEventArgs e)
         {
-            
             string fileName = SpriteName.Text + ".png";
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string savingPath = Path.Combine(desktopPath, fileName);
@@ -170,9 +167,10 @@ namespace SpriteGenerator.Pages
                 MessageBox.Show(exeption.Message);
                 return;
             }
+        }
 
-            
-
+        private void SaveSprite(object sender, RoutedEventArgs e)
+        {
             string jsonPath = "../../SavedSprites/Saved.JSON";
             if (!File.Exists(jsonPath))
             {
@@ -234,42 +232,42 @@ namespace SpriteGenerator.Pages
         {
             headX += headWidth + 1;
             headX = headX % (head.PixelWidth - 1);
-            update();
+            Update();
         }
 
         private void NextBody(object sender, RoutedEventArgs e)
         {
             bodyX += bodyWidth + 1;
             bodyX = bodyX % (body.PixelWidth - 1);
-            update();
+            Update();
         }
 
         private void NextLegs(object sender, RoutedEventArgs e)
         {
             legsX += legsWidth + 1;
             legsX = legsX % (legs.PixelWidth - 1);
-            update();
+            Update();
         }
 
         private void PrevLegs(object sender, RoutedEventArgs e)
         {
             legsX -= legsWidth + 1;
             legsX = (legsX + legs.PixelWidth - 1) % (legs.PixelWidth - 1);
-            update();
+            Update();
         }
 
         private void PrevBody(object sender, RoutedEventArgs e)
         {
             bodyX -= bodyWidth + 1;
             bodyX = (bodyX + body.PixelWidth - 1) % (body.PixelWidth - 1);
-            update();
+            Update();
         }
 
         private void PrevHead(object sender, RoutedEventArgs e)
         {
             headX -= headWidth + 1;
             headX = (headX + head.PixelWidth - 1) % (head.PixelWidth - 1);
-            update();
+            Update();
         }
     }
 }

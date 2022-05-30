@@ -14,6 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
 
@@ -30,6 +31,7 @@
                 Text="SpriteName"
                 Name="SpriteName"
                 Grid.Column="1"
+                Grid.ColumnSpan="2"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Foreground="White"
@@ -81,7 +83,7 @@
 
         <!-- Head Right -->
         <Button Grid.Row="1" 
-                Grid.Column="2" 
+                Grid.Column="3" 
                 Content="4"
                 VerticalContentAlignment="Center"
                 Background="Transparent"
@@ -95,7 +97,7 @@
                 Click="NextHead"/>
         <!-- Body Right -->
         <Button Grid.Row="2" 
-                Grid.Column="2" 
+                Grid.Column="3" 
                 Content="4"
                 VerticalContentAlignment="Center"
                 Background="Transparent"
@@ -109,7 +111,7 @@
                 Click="NextBody"/>
         <!-- Legs Right -->
         <Button Grid.Row="3" 
-                Grid.Column="2" 
+                Grid.Column="3" 
                 Content="4"
                 VerticalContentAlignment="Center"
                 Cursor="Hand"
@@ -125,6 +127,7 @@
 
 
         <Image Grid.Column="1" 
+               Grid.ColumnSpan="2"
                Grid.Row="1" 
                Grid.RowSpan="3"
                Name="Char"
@@ -133,6 +136,7 @@
         <Button Grid.Row="4" 
                 Grid.Column="1"
                 Content="Сохранить спрайт"
+                Margin="0 0 10 0"
                 Cursor="Hand"
                 Background="#151525"
                 BorderThickness="0"
@@ -141,9 +145,26 @@
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                FontSize="30"
+                FontSize="20"
                 FontWeight="Bold"
                 Click="SaveSprite"/>
+
+        <Button Grid.Row="4" 
+                Grid.Column="2"
+                Margin="10 0 0 0"
+                Cursor="Hand"
+                Background="#151525"
+                BorderThickness="0"
+                Foreground="White"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                FontSize="20"
+                FontWeight="Bold"
+                Click="ExportSprite">
+            <TextBlock Text="Экспортировать спрайт" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Button>
 
 
 

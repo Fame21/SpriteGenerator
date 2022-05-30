@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Web.Script.Serialization;
 using System.Windows.Input;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SpriteGenerator.Pages
 {
@@ -128,10 +130,6 @@ namespace SpriteGenerator.Pages
                 }
             }
 
-            //amalgam.WritePixels(new Int32Rect(6, 31, 15, 17), legsPixels, legsSource.PixelWidth * (legsSource.Format.BitsPerPixel / 8), 0);
-            //amalgam.WritePixels(new Int32Rect(1, 1, 25, 22), headPixels, headSource.PixelWidth * (headSource.Format.BitsPerPixel / 8), 0);
-            //amalgam.WritePixels(new Int32Rect(1, 18, 25, 22), bodyPixels, bodySource.PixelWidth * (bodySource.Format.BitsPerPixel / 8), 0);
-
             amalgam.WritePixels(new Int32Rect(0, 0, 27, 49), amalgamPixels, amalgam.PixelWidth * (amalgam.Format.BitsPerPixel / 8), 0);
 
             return amalgam;
@@ -139,7 +137,6 @@ namespace SpriteGenerator.Pages
 
         private byte[] BitmapSourceToArray(BitmapSource bitmapSource)
         {
-            // Stride = (width) x (bytes per pixel)
             int stride = (int)bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
             byte[] pixels = new byte[(int)bitmapSource.PixelHeight * stride];
 
@@ -170,31 +167,43 @@ namespace SpriteGenerator.Pages
 
 
 
-        private void loadPage(int page = 1)
+        private dynamic loadJson()
         {
             string jsonPath = "../../SavedSprites/Saved.JSON";
             string jsonData = "";
+
             if (File.Exists(jsonPath))
             {
                 if (File.ReadAllText(jsonPath) == "")
                 {
-                    return;
-                } else
+                    return null;
+                }
+                else
                 {
                     jsonData = JsonConvert.DeserializeObject(File.ReadAllText(jsonPath)).ToString();
                 }
-                
-            } 
+            }
             else
+            {
+                return null;
+            }
+
+            dynamic jss = new JavaScriptSerializer();
+            dynamic data = jss.Deserialize<dynamic>(jsonData);
+
+            return (data, jsonPath);
+        }
+
+        private void loadPage(int page = 1)
+        {
+
+            dynamic data = loadJson().Item1;
+
+            if (data == null)
             {
                 return;
             }
 
-
-            dynamic jss = new JavaScriptSerializer();
-
-            
-            dynamic data = jss.Deserialize<dynamic>(jsonData);
 
             pageCount = (data.Count / 15) + 1;
             int lastPageCount = data.Count % 15;
@@ -260,10 +269,14 @@ namespace SpriteGenerator.Pages
         }
         private void SelectSprite(object sender, MouseEventArgs e)
         {
+            if (selected == (Border)sender)
+            {
+                UnselectSprite();
+                return;
+            }
             UnselectSprite();
             selected = (Border)sender;
             ((Border)sender).BorderBrush = Brushes.White;
-            //((Image)sender)
         }
 
         private void SaveSprite(string spriteName, Image spriteImage)
@@ -286,6 +299,40 @@ namespace SpriteGenerator.Pages
                 return;
             }
             
+        } 
+
+        private void DeleteSprite(int deleteIdx)
+        {
+            dynamic data = loadJson().Item1;
+            string path = loadJson().Item2;
+
+            if (data == null)
+            {
+                return;
+            }
+
+            Console.WriteLine(data["sprite" + deleteIdx]);
+            int initialSize = data.Count;
+            for (int i = deleteIdx; i < data.Count - 2; i++)
+            {
+                data["sprite" + i] = data["sprite" + (i + 1)];
+            }
+            data.Remove("sprite" + (data.Count - 1));
+
+
+            string output = JsonConvert.SerializeObject(data, Formatting.Indented);
+            File.WriteAllText(path, output);
+
+
+
+
+
+
+
+            //string json = JsonSerializer.Serialize(data);
+            //File.WriteAllText(path, output);
+            loadPage();
+
         }
 
         private string GetNextFileName(string fileName)
@@ -312,7 +359,28 @@ namespace SpriteGenerator.Pages
             string idx = selected.Name.Substring(6);
             string name = ((TextBlock)this.FindName("Name" + idx)).Text;
             Image image = (Image)this.FindName("Pic" + idx);
-            SaveSprite(name, image);
+            if (image.Source != null)
+            {
+                SaveSprite(name, image);
+            }
+        }
+
+        private void DeleteSelectedSprite(object sender, RoutedEventArgs e)
+        {
+            if (selected == null)
+            {
+                return;
+            }
+
+            int itemIdx = Int32.Parse(selected.Name.Substring(6));
+            int jsonIdx = itemIdx - 1 + (pageIdx - 1) * 15;
+            Image image = (Image)this.FindName("Pic" + itemIdx);
+
+
+            if (image.Source != null)
+            {
+                DeleteSprite(jsonIdx);
+            }
         }
 
         private void NextPage(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -124,7 +125,6 @@ namespace SpriteGenerator.Pages
 
 
             amalgam.WritePixels(new Int32Rect(0, 0, 27, 49), amalgamPixels, amalgam.PixelWidth * (amalgam.Format.BitsPerPixel / 8), 0);
-            Console.WriteLine(amalgam.GetType());
             return amalgam;
         }
 
@@ -191,9 +191,8 @@ namespace SpriteGenerator.Pages
             else
             {
                 string json = File.ReadAllText(jsonPath);
-                dynamic jss = new JavaScriptSerializer();
-                dynamic jsonObj = JsonConvert.DeserializeObject(json);
-                dynamic data = jss.Deserialize<dynamic>(jsonObj.ToString());
+                JObject jsonObj = (JObject)JsonConvert.DeserializeObject(json);
+                int dataCount = jsonObj.Count;
 
                 var spriteData = new Dictionary<string, object>();
                 spriteData["name"] = SpriteName.Text;
@@ -203,12 +202,13 @@ namespace SpriteGenerator.Pages
                 int legsIdx = legsX / legsWidth;
 
                 spriteData["parts"] = new int[3] { headIdx, bodyIdx, legsIdx };
-                jsonObj["sprite" + (data.Count)] = JsonConvert.SerializeObject(spriteData);
+                jsonObj["sprite" + (dataCount)] = JsonConvert.SerializeObject(spriteData);
+                
                 string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
-
                 output = output.Replace("\\", "");
                 output = output.Replace("\"{", "{");
                 output = output.Replace("}\"", "}");
+
                 File.WriteAllText(jsonPath, output);
             }
         }

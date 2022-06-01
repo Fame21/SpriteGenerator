@@ -279,7 +279,7 @@ namespace SpriteGenerator.Pages
             ((Border)sender).BorderBrush = Brushes.White;
         }
 
-        private void SaveSprite(string spriteName, Image spriteImage)
+        private void ExportSprite(string spriteName, Image spriteImage)
         {
             string fileName = spriteName + ".png";
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -311,7 +311,6 @@ namespace SpriteGenerator.Pages
                 return;
             }
 
-            Console.WriteLine(data["sprite" + deleteIdx]);
             int initialSize = data.Count;
             for (int i = deleteIdx; i < data.Count - 2; i++)
             {
@@ -323,16 +322,10 @@ namespace SpriteGenerator.Pages
             string output = JsonConvert.SerializeObject(data, Formatting.Indented);
             File.WriteAllText(path, output);
 
+            int page = (deleteIdx) / 15 + 1;
 
-
-
-
-
-
-            //string json = JsonSerializer.Serialize(data);
-            //File.WriteAllText(path, output);
-            loadPage();
-
+            loadPage(page);
+            UnselectSprite();
         }
 
         private string GetNextFileName(string fileName)
@@ -361,7 +354,7 @@ namespace SpriteGenerator.Pages
             Image image = (Image)this.FindName("Pic" + idx);
             if (image.Source != null)
             {
-                SaveSprite(name, image);
+                ExportSprite(name, image);
             }
         }
 

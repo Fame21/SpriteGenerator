@@ -473,14 +473,15 @@
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                FontSize="30"
+                FontSize="28"
                 FontWeight="Bold"
                 Click="SaveSelectedSprite"/>
 
         <!-- Save Button -->
         <Button Grid.Row="100" 
                 Grid.Column="0"
-                Grid.ColumnSpan="1"
+                Grid.ColumnSpan="2"
+                Margin="0 0 15 0"
                 Content="Удалить"
                 Cursor="Hand"
                 Foreground="White"
@@ -490,7 +491,7 @@
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                FontSize="30"
+                FontSize="28"
                 FontWeight="Bold"
                 Click="DeleteSelectedSprite"/>
 

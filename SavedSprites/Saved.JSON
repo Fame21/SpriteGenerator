@@ -1,1 +1,106 @@
-{}
+{
+  "sprite0": {
+    "name": "Bob",
+    "parts": [
+      0,
+      0,
+      0
+    ]
+  },
+  "sprite1": {
+    "name": "Олег",
+    "parts": [
+      4,
+      3,
+      3
+    ]
+  },
+  "sprite2": {
+    "name": "Михалыч",
+    "parts": [
+      5,
+      7,
+      4
+    ]
+  },
+  "sprite3": {
+    "name": "Алексей",
+    "parts": [
+      2,
+      6,
+      6
+    ]
+  },
+  "sprite4": {
+    "name": "Martha",
+    "parts": [
+      7,
+      7,
+      4
+    ]
+  },
+  "sprite5": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      2,
+      2
+    ]
+  },
+  "sprite6": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      2,
+      2
+    ]
+  },
+  "sprite7": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      2,
+      2
+    ]
+  },
+  "sprite8": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      2,
+      2
+    ]
+  },
+  "sprite9": {
+    "name": "SpriteName",
+    "parts": [
+      2,
+      2,
+      2
+    ]
+  },
+  "sprite10": {
+    "name": "SpriteName",
+    "parts": [
+      2,
+      2,
+      2
+    ]
+  },
+  "sprite11": {
+    "name": "SpriteName",
+    "parts": [
+      2,
+      2,
+      2
+    ]
+  },
+  "sprite12": {
+    "name": "SpriteName",
+    "parts": [
+      2,
+      2,
+      2
+    ]
+  }
+}

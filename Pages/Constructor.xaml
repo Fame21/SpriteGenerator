@@ -134,7 +134,8 @@
                RenderOptions.BitmapScalingMode="NearestNeighbor"/>
 
         <Button Grid.Row="4" 
-                Grid.Column="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Content="Сохранить спрайт"
                 Margin="0 0 10 0"
                 Cursor="Hand"
@@ -145,12 +146,13 @@
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                FontSize="20"
+                FontSize="28"
                 FontWeight="Bold"
                 Click="SaveSprite"/>
 
         <Button Grid.Row="4" 
                 Grid.Column="2"
+                Grid.ColumnSpan="2"
                 Margin="10 0 0 0"
                 Cursor="Hand"
                 Background="#151525"
@@ -160,10 +162,12 @@
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                FontSize="20"
+                FontSize="28"
                 FontWeight="Bold"
                 Click="ExportSprite">
-            <TextBlock Text="Экспортировать спрайт" TextWrapping="Wrap" TextAlignment="Center"/>
+            <TextBlock Text="Экспортировать спрайт" 
+                       TextWrapping="Wrap" 
+                       TextAlignment="Center"/>
         </Button>
 
 

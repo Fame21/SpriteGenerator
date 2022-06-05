@@ -161,6 +161,8 @@ namespace SpriteGenerator.Pages
             {
                 using (FileStream stream = new FileStream(savingPath, FileMode.Create))
                     encoder.Save(stream);
+                MessageBox.Show("Спрайт персонажа экпортирован на рабочий стол.");
+                return;
             }
             catch (Exception exeption)
             {
@@ -210,6 +212,7 @@ namespace SpriteGenerator.Pages
                 output = output.Replace("}\"", "}");
 
                 File.WriteAllText(jsonPath, output);
+                MessageBox.Show("Спрайт персонажа успешно сохранен.");
             }
         }
 

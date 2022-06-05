@@ -293,6 +293,8 @@ namespace SpriteGenerator.Pages
             {
                 using (FileStream stream = new FileStream(savingPath, FileMode.Create))
                     encoder.Save(stream);
+                MessageBox.Show("Спрайт персонажа экпортирован на рабочий стол.");
+                return;
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

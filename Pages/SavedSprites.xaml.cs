@@ -46,11 +46,11 @@ namespace SpriteGenerator.Pages
         public SavedSprites()
         {
             InitializeComponent();
-            loadPage();
+            LoadPage();
         }
 
 
-        private WriteableBitmap mergeParts(int headIdx, int bodyIdx, int legsIdx)
+        private WriteableBitmap MergeParts(int headIdx, int bodyIdx, int legsIdx)
         {
             WriteableBitmap amalgam = new WriteableBitmap(
                 27, // width
@@ -167,7 +167,7 @@ namespace SpriteGenerator.Pages
 
 
 
-        private dynamic loadJson()
+        private dynamic LoadJSON()
         {
             string jsonPath = "../../SavedSprites/Saved.JSON";
             string jsonData = "";
@@ -194,10 +194,10 @@ namespace SpriteGenerator.Pages
             return (data, jsonPath);
         }
 
-        private void loadPage(int page = 1)
+        private void LoadPage(int page = 1)
         {
 
-            dynamic data = loadJson().Item1;
+            dynamic data = LoadJSON().Item1;
 
             if (data == null)
             {
@@ -248,7 +248,7 @@ namespace SpriteGenerator.Pages
                 string nameText = data[spriteIdx]["name"];
                 dynamic partsList = data[spriteIdx]["parts"];
 
-                WriteableBitmap amalgam = mergeParts(partsList[0], partsList[1], partsList[2]);
+                WriteableBitmap amalgam = MergeParts(partsList[0], partsList[1], partsList[2]);
                 var myTextBlock = (TextBlock)this.FindName(nameIdx);
                 myTextBlock.Text = nameText;
                 var myImgBlock = (Image)this.FindName(picIdx);
@@ -305,8 +305,8 @@ namespace SpriteGenerator.Pages
 
         private void DeleteSprite(int deleteIdx)
         {
-            dynamic data = loadJson().Item1;
-            string path = loadJson().Item2;
+            dynamic data = LoadJSON().Item1;
+            string path = LoadJSON().Item2;
 
             if (data == null)
             {
@@ -326,7 +326,7 @@ namespace SpriteGenerator.Pages
 
             int page = (deleteIdx) / 15 + 1;
 
-            loadPage(page);
+            LoadPage(page);
             UnselectSprite();
         }
 
@@ -382,7 +382,7 @@ namespace SpriteGenerator.Pages
         {
             UnselectSprite();
             pageIdx = ((pageIdx++) % pageCount) + 1;
-            loadPage(pageIdx);
+            LoadPage(pageIdx);
             PageNum.Text = "Страница: " + pageIdx;
         }
 
@@ -391,7 +391,7 @@ namespace SpriteGenerator.Pages
         {
             UnselectSprite();
             pageIdx = (((pageIdx-- + pageCount) % pageCount)) + 1;
-            loadPage(pageIdx);
+            LoadPage(pageIdx);
             PageNum.Text = "Страница: " + pageIdx;
         }
 

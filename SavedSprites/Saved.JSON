@@ -38,5 +38,94 @@
       7,
       4
     ]
-  }
+  },
+  "sprite5": {
+    "name": "Smith",
+    "parts": [
+      2,
+      2,
+      2
+    ]
+  },
+  "sprite6": {
+    "name": "Joshua",
+    "parts": [
+      3,
+      3,
+      3
+    ]
+  },
+  "sprite7": {
+    "name": "Hellena",
+    "parts": [
+      9,
+      8,
+      7
+    ]
+  },
+  "sprite8": {
+    "name": "Маша",
+    "parts": [
+      6,
+      6,
+      6
+    ]
+  },
+  "sprite9": {
+    "name": "Купец",
+    "parts": [
+      4,
+      3,
+      4
+    ]
+  },
+  "sprite10": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      0,
+      0
+    ]
+  },
+  "sprite11": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      0,
+      0
+    ]
+  },
+  "sprite12": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      0,
+      0
+    ]
+  },
+  "sprite13": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      0,
+      0
+    ]
+  },
+  "sprite14": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      2,
+      1
+    ]
+  },
+  "sprite15": {
+    "name": "SpriteName",
+    "parts": [
+      0,
+      2,
+      1
+    ]
+  },
+  "sprite16": {"name":"SpriteName","parts":[0,0,0]}
 }

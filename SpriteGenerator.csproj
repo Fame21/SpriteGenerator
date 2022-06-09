@@ -121,21 +121,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Idle\Original\Idle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Idle\ColorGreen\Idle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Idle\ColorBlue\Idle.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\redacted\body.png" />
     <Resource Include="Images\redacted\head.png" />
     <Resource Include="Images\redacted\legs.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\Saved\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

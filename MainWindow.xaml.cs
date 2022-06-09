@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace SpriteGenerator
@@ -11,7 +10,6 @@ namespace SpriteGenerator
     {
         public MainWindow()
         {
-            RadioButton radioButton = new RadioButton();
             InitializeComponent();
             Main.Content = new Pages.Constructor();
         }

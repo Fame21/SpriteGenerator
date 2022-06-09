@@ -65,9 +65,7 @@ namespace SpriteGenerator.Pages
             byte[] bodyPixels = BitmapSourceToArray(bodySource);
             byte[] legsPixels = BitmapSourceToArray(legsSource);
 
-
             byte[] amalgamPixels = BitmapSourceToArray(amalgam);
-
 
             int amalgamPixelsIdx = 0;
             int PixelsIdx = 0;
@@ -135,7 +133,8 @@ namespace SpriteGenerator.Pages
             bitmapSource.CopyPixels(pixels, stride, 0);
             return pixels;
         }
-        
+
+
 
         private void Update()
         {

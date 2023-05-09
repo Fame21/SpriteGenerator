@@ -111,21 +111,5 @@
       0
     ]
   },
-  "sprite14": {
-    "name": "SpriteName",
-    "parts": [
-      0,
-      2,
-      1
-    ]
-  },
-  "sprite15": {
-    "name": "SpriteName",
-    "parts": [
-      0,
-      2,
-      1
-    ]
-  },
-  "sprite16": {"name":"SpriteName","parts":[0,0,0]}
+  "sprite14": {"name":"SpriteName","parts":[0,8,0]}
 }

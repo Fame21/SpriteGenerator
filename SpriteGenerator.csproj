@@ -76,6 +76,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -185,9 +186,12 @@
     <Resource Include="Images\New\trev-ovr.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\redacted\body.png" />
-    <Resource Include="Images\redacted\head.png" />
-    <Resource Include="Images\redacted\legs.png" />
+    <Resource Include="Images\Bodies\classic.png" />
+    <Resource Include="Images\Heads\classic.png" />
+    <Resource Include="Images\Legs\classic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\redacted\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -36,9 +36,9 @@ namespace SpriteGenerator.Pages
         int legsWidth = 15;
         int legsHeight = 17;
 
-        BitmapImage head = new BitmapImage(new Uri("../../Images/redacted/head.png", UriKind.Relative));
-        BitmapImage body = new BitmapImage(new Uri("../../Images/redacted/body.png", UriKind.Relative));
-        BitmapImage legs = new BitmapImage(new Uri("../../Images/redacted/legs.png", UriKind.Relative));
+        BitmapImage head = new BitmapImage(new Uri("../../Images/Heads/classic.png", UriKind.Relative));
+        BitmapImage body = new BitmapImage(new Uri("../../Images/Bodies/classic.png", UriKind.Relative));
+        BitmapImage legs = new BitmapImage(new Uri("../../Images/Legs/classic.png", UriKind.Relative));
 
         int pageIdx = 1;
         int pageCount = 1;

@@ -152,7 +152,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SavedSprites\Saved.JSON" />
     <None Include="SpriteGenerator_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +191,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\redacted\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SavedSprites\SpriteName%281%29.png" />
+    <Resource Include="SavedSprites\SpriteName%282%29.png" />
+    <Resource Include="SavedSprites\SpriteName.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

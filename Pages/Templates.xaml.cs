@@ -26,6 +26,12 @@ namespace SpriteGenerator.Pages
             Loaded += Templates_Loaded;
         }
 
+        private void UpdateComboBox(ComboBox comboBox, List<string> data)
+        {
+            comboBox.ItemsSource = data; 
+            comboBox.SelectedIndex = data.Count;
+        }
+
         private void Templates_Loaded(object sender, RoutedEventArgs e)
         {
             
@@ -37,7 +43,6 @@ namespace SpriteGenerator.Pages
                 {
                     _uploadedHeads.Add(File);
                 }
-                Head_ComboBox.ItemsSource = _uploadedHeads;
             }
             else
             {
@@ -52,7 +57,6 @@ namespace SpriteGenerator.Pages
                 {
                     _uploadedBodies.Add(File);
                 }
-                Body_ComboBox.ItemsSource = _uploadedBodies;
             }
             else
             {
@@ -67,7 +71,6 @@ namespace SpriteGenerator.Pages
                 {
                     _uploadedLegs.Add(File);
                 }
-                Legs_ComboBox.ItemsSource = _uploadedLegs;
             }
             else
             {
@@ -105,7 +108,7 @@ namespace SpriteGenerator.Pages
                         multiplesCounter = " (" + fileCounter + ")";
                     }
             } 
-            Head_ComboBox.ItemsSource = _uploadedHeads;
+
         }
 
         private void DeleteHead_Click(object sender, RoutedEventArgs e)
@@ -115,32 +118,7 @@ namespace SpriteGenerator.Pages
 
         private void UploadBody_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog choofdlog = new OpenFileDialog();
-            choofdlog.Filter = "All Files (*.*)|*.*";
-            choofdlog.FilterIndex = 1;
-
-            if (choofdlog.ShowDialog() == true)
-            {
-                string sFileName = choofdlog.FileName;
-                string sFileName_Body = Path.GetFileNameWithoutExtension(sFileName);
-                int fileCounter = 0;
-                string multiplesCounter = "";
-                bool uploading = true;
-                while (uploading)
-                    try
-                    {
-
-                        File.Copy(sFileName, Path.Combine(HeadsPath, sFileName_Body + multiplesCounter + ".png"));
-                        _uploadedHeads.Add(sFileName);
-                        uploading = false;
-                    }
-                    catch (IOException ex)
-                    {
-                        fileCounter++;
-                        multiplesCounter = " (" + fileCounter + ")";
-                    }
-            }
-            Head_ComboBox.ItemsSource = _uploadedHeads;
+            //
         }
 
         private void DeleteBody_Click(object sender, RoutedEventArgs e)

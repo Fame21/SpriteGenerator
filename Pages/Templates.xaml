@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SpriteGenerator.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="800"
       Title="Templates">
 
     <Grid>
@@ -20,29 +20,69 @@
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0"
-                    HorizontalAlignment="Center" 
-                    Orientation="Horizontal" 
-                    Margin="10,20">
-            <ComboBox Width="350" Name="Head_ComboBox"  />
-            <Button Width="200" Margin="10,0,10,0" Name="DeleteHead"  Content="Delete Selected" Click="DeleteHead_Click" />
-            <Button Width="200" Name="UploadHead" Content="Upload File" Click="UploadHead_Click" />
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Head" 
+                       TextWrapping="Wrap" 
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       TextAlignment="Center"/>
+            <StackPanel Grid.Row="0"
+                        Height="35"
+                        HorizontalAlignment="Center" 
+                        Orientation="Horizontal" 
+                        Margin="10,20">
+                <TextBlock Text="TemplateName" 
+                           TextWrapping="Wrap" 
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           TextAlignment="Center"/>
+                <Button Width="100" Margin="10,0,10,0" Name="DeleteHead"  Content="Delete Selected" Click="DeleteHead_Click" />
+                <Button Width="100" Name="UploadHead" Content="Upload File" Click="UploadHead_Click" />
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="1"
-                    HorizontalAlignment="Center" 
-                    Orientation="Horizontal" 
-                    Margin="10,20">
-            <ComboBox Width="350" Name="Body_ComboBox"  />
-            <Button Width="200" Margin="10,0,10,0" Name="DeleteBody" Content="Delete Selected" Click="DeleteBody_Click" />
-            <Button Width="200" Name="UploadBody" Content="Upload File" Click="UploadBody_Click" />
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Body" 
+                       TextWrapping="Wrap" 
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       TextAlignment="Center"/>
+            <StackPanel Height="35"
+                        HorizontalAlignment="Center" 
+                        Orientation="Horizontal" 
+                        Margin="10,20">
+                <TextBlock Text="TemplateName" 
+                           TextWrapping="Wrap" 
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           TextAlignment="Center"/>
+                <Button Width="100" Margin="10,0,10,0" Name="DeleteBody" Content="Delete Selected" Click="DeleteBody_Click" />
+                <Button Width="100" Name="UploadBody" Content="Upload File" Click="UploadBody_Click" />
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="2"
-                    HorizontalAlignment="Center" 
-                    Orientation="Horizontal" 
-                    Margin="10,20">
-            <ComboBox Width="350" Name="Legs_ComboBox"  />
-            <Button Width="200" Margin="10,0,10,0" Name="DeleteLegs" Content="Delete Selected" Click="DeleteLegs_Click" />
-            <Button Width="200" Name="UploadLegs" Content="Upload File" Click="UploadLegs_Click" />
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Legs" 
+                       TextWrapping="Wrap" 
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       TextAlignment="Center"/>
+            <StackPanel Height="35"
+                        HorizontalAlignment="Center" 
+                        Orientation="Horizontal" 
+                        Margin="10,20">
+                <TextBlock Text="TemplateName" 
+                           TextWrapping="Wrap" 
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           TextAlignment="Center"/>
+                <Button Width="100" Margin="10,0,10,0" Name="DeleteLegs" Content="Delete Selected" Click="DeleteLegs_Click" />
+                <Button Width="100" Name="UploadLegs" Content="Upload File" Click="UploadLegs_Click" />
+            </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="3" 
                     HorizontalAlignment="Center" 

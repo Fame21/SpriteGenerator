@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 
 namespace SpriteGenerator
@@ -13,5 +8,21 @@ namespace SpriteGenerator
     /// </summary>
     public partial class App : Application
     {
+        public static string MyGlobalString { get; set; }
+        public static string GetNextFileName(string fileName)
+        {
+            string extension = Path.GetExtension(fileName);
+            string pathName = Path.GetDirectoryName(fileName);
+            string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(fileName));
+            int i = 0;
+            // If the file exists, keep trying until it doesn't
+            while (File.Exists(fileName))
+            {
+                i += 1;
+                fileName = string.Format("{0}({1}){2}", fileNameOnly, i, extension);
+            }
+            return fileName;
+        }
+
     }
 }

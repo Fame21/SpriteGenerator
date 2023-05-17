@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -39,7 +38,7 @@ namespace SpriteGenerator
         }
 
         private void BtnClickSaved(object sender, RoutedEventArgs e)
-        { 
+        {
             if (_lastClickedBtn != (Button)sender)
             {
                 Main.Content = new Pages.SavedSprites();
@@ -49,7 +48,7 @@ namespace SpriteGenerator
         }
 
         private void BtnClickTemplates(object sender, RoutedEventArgs e)
-        {    
+        {
             if (_lastClickedBtn != (Button)sender)
             {
                 Main.Content = new Pages.Templates();

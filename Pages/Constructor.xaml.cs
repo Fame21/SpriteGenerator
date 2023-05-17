@@ -1,10 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -66,10 +61,8 @@ namespace SpriteGenerator.Pages
             byte[] legsPixels = BitmapSourceToArray(legsSource);
 
             byte[] amalgamPixels = BitmapSourceToArray(amalgam);
-
-            int amalgamPixelsIdx = 0;
-            int PixelsIdx = 0;
-
+            int amalgamPixelsIdx;
+            int PixelsIdx;
             for (int i = 0; i < legsSource.PixelHeight; i++)
             {
                 for (int j = 0; j < legsSource.PixelWidth; j++)
@@ -151,15 +144,17 @@ namespace SpriteGenerator.Pages
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string savingPath = Path.Combine(desktopPath, fileName);
 
-            savingPath = GetNextFileName(savingPath);
+            savingPath = App.GetNextFileName(savingPath);
 
-            var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)Char.Source));
 
             try
             {
                 using (FileStream stream = new FileStream(savingPath, FileMode.Create))
+                {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create((BitmapSource)Char.Source));
                     encoder.Save(stream);
+                }
                 MessageBox.Show("Спрайт персонажа экпортирован на рабочий стол.");
                 return;
             }
@@ -172,63 +167,31 @@ namespace SpriteGenerator.Pages
 
         private void SaveSprite(object sender, RoutedEventArgs e)
         {
-            string jsonPath = "../../SavedSprites/Saved.JSON";
-            if (!File.Exists(jsonPath))
-            {
-                try
-                {
-                    File.Create(jsonPath);
-                }
-                catch (Exception exeption)
-                {
-                    MessageBox.Show(exeption.Message);
-                }
-            }
+            string savedPath = "../../SavedSprites/";
+            string fileName = SpriteName.Text + ".png";
+            string savingPath = Path.Combine(savedPath, fileName);
 
-            if (File.ReadAllText(jsonPath) == "")
+
+            savingPath = App.GetNextFileName(savingPath);
+
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)Char.Source));
+
+            try
             {
+                using (FileStream stream = new FileStream(savingPath, FileMode.Create))
+                    encoder.Save(stream);
+                MessageBox.Show("Спрайт персонажа сохранен.");
                 return;
             }
-            else
+            catch (Exception exeption)
             {
-                string json = File.ReadAllText(jsonPath);
-                JObject jsonObj = (JObject)JsonConvert.DeserializeObject(json);
-                int dataCount = jsonObj.Count;
-
-                var spriteData = new Dictionary<string, object>();
-                spriteData["name"] = SpriteName.Text;
-
-                int headIdx = headX / headWidth;
-                int bodyIdx = bodyX / bodyWidth;
-                int legsIdx = legsX / legsWidth;
-
-                spriteData["parts"] = new int[3] { headIdx, bodyIdx, legsIdx };
-                jsonObj["sprite" + (dataCount)] = JsonConvert.SerializeObject(spriteData);
-                
-                string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
-                output = output.Replace("\\", "");
-                output = output.Replace("\"{", "{");
-                output = output.Replace("}\"", "}");
-
-                File.WriteAllText(jsonPath, output);
-                MessageBox.Show("Спрайт персонажа успешно сохранен.");
+                MessageBox.Show(exeption.Message);
+                return;
             }
         }
 
-        private string GetNextFileName(string fileName)
-        {
-            string extension = Path.GetExtension(fileName);
-            string pathName = Path.GetDirectoryName(fileName);
-            string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(fileName));
-            int i = 0;
-            // If the file exists, keep trying until it doesn't
-            while (File.Exists(fileName))
-            {
-                i += 1;
-                fileName = string.Format("{0}({1}){2}", fileNameOnly, i, extension);
-            }
-            return fileName;
-        }
+
         // Next/prev buttons
         private void NextHead(object sender, RoutedEventArgs e)
         {

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -20,21 +19,18 @@ namespace SpriteGenerator.Pages
         private string BodiesPath = @"../../Images/Bodies"; // замените на нужный путь
         private string LegsPath = @"../../Images/Legs"; // замените на нужный путь
 
+
+
         public Templates()
         {
             InitializeComponent();
             Loaded += Templates_Loaded;
         }
 
-        private void UpdateComboBox(ComboBox comboBox, List<string> data)
-        {
-            comboBox.ItemsSource = data; 
-            comboBox.SelectedIndex = data.Count;
-        }
 
         private void Templates_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
             // Load Heads
             if (Directory.Exists(HeadsPath))
             {
@@ -107,7 +103,7 @@ namespace SpriteGenerator.Pages
                         fileCounter++;
                         multiplesCounter = " (" + fileCounter + ")";
                     }
-            } 
+            }
 
         }
 

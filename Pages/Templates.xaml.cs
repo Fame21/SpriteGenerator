@@ -1,8 +1,9 @@
 ﻿using Microsoft.Win32;
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace SpriteGenerator.Pages
 {
@@ -11,100 +12,56 @@ namespace SpriteGenerator.Pages
     /// </summary>
     public partial class Templates : Page
     {
-        private List<string> _uploadedHeads = new List<string>();
-        private List<string> _uploadedBodies = new List<string>();
-        private List<string> _uploadedLegs = new List<string>();
-
-        private string HeadsPath = @"../../Images/Heads"; // замените на нужный путь
-        private string BodiesPath = @"../../Images/Bodies"; // замените на нужный путь
-        private string LegsPath = @"../../Images/Legs"; // замените на нужный путь
-
-
-
         public Templates()
         {
             InitializeComponent();
-            Loaded += Templates_Loaded;
+            Loaded += LoadDefaultTemplates;
         }
 
-
-        private void Templates_Loaded(object sender, RoutedEventArgs e)
+        private void ChangeImageControlSource(System.Windows.Controls.Image imageControl, string imagePath)
         {
+            //string[] filesEntries = Directory.GetFiles(imagePath);
+            //string classicPath = Array.Find(filesEntries, file => Path.GetFileName(file) == "classic.png");
+            string fullPath = Path.GetFullPath(imagePath);
+            Uri uri = new Uri($"file:{fullPath}");
+            BitmapImage bitmap = new BitmapImage(uri);
+            imageControl.Source = bitmap;
 
-            // Load Heads
-            if (Directory.Exists(HeadsPath))
+        }
+        private void LoadDefaultTemplates(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                string[] filesEntries = Directory.GetFiles(HeadsPath);
-                foreach (string File in filesEntries)
-                {
-                    _uploadedHeads.Add(File);
-                }
+                ChangeImageControlSource(HeadImageControl, App.HeadsPath);
+                ChangeImageControlSource(BodyImageControl, App.BodiesPath);
+                ChangeImageControlSource(LegsImageControl, App.LegsPath);
             }
-            else
+            catch (Exception ex)
             {
-                // skip
-            }
-
-            // Load Heads
-            if (Directory.Exists(BodiesPath))
-            {
-                string[] filesEntries = Directory.GetFiles(BodiesPath);
-                foreach (string File in filesEntries)
-                {
-                    _uploadedBodies.Add(File);
-                }
-            }
-            else
-            {
-                // skip
-            }
-
-            // Load Heads
-            if (Directory.Exists(LegsPath))
-            {
-                string[] filesEntries = Directory.GetFiles(LegsPath);
-                foreach (string File in filesEntries)
-                {
-                    _uploadedLegs.Add(File);
-                }
-            }
-            else
-            {
-                // skip
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-
-
-
+        private string LoadStringFromDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                return openFileDialog.FileName;
+            }
+            else { return null; }
+        }
         private void UploadHead_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog choofdlog = new OpenFileDialog();
-            choofdlog.Filter = "All Files (*.*)|*.*";
-            choofdlog.FilterIndex = 1;
-
-            if (choofdlog.ShowDialog() == true)
+            try
             {
-                string sFileName = choofdlog.FileName;
-                string sFileName_Head = Path.GetFileNameWithoutExtension(sFileName);
-                int fileCounter = 0;
-                string multiplesCounter = "";
-                bool uploading = true;
-                while (uploading)
-                    try
-                    {
-
-                        File.Copy(sFileName, Path.Combine(HeadsPath, sFileName_Head + multiplesCounter + ".png"));
-                        _uploadedHeads.Add(sFileName);
-                        uploading = false;
-                    }
-                    catch (IOException ex)
-                    {
-                        fileCounter++;
-                        multiplesCounter = " (" + fileCounter + ")";
-                    }
+                App.HeadsPath = LoadStringFromDialog();
+                ChangeImageControlSource(HeadImageControl, App.HeadsPath);
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteHead_Click(object sender, RoutedEventArgs e)
@@ -114,7 +71,15 @@ namespace SpriteGenerator.Pages
 
         private void UploadBody_Click(object sender, RoutedEventArgs e)
         {
-            //
+            try
+            {
+                App.BodiesPath = LoadStringFromDialog();
+                ChangeImageControlSource(BodyImageControl, App.BodiesPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteBody_Click(object sender, RoutedEventArgs e)
@@ -123,7 +88,15 @@ namespace SpriteGenerator.Pages
         }
         private void UploadLegs_Click(object sender, RoutedEventArgs e)
         {
-            //
+            try
+            {
+                App.LegsPath = LoadStringFromDialog();
+                ChangeImageControlSource(LegsImageControl, App.LegsPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void DeleteLegs_Click(object sender, RoutedEventArgs e)
         {

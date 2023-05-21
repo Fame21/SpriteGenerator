@@ -14,26 +14,30 @@ namespace SpriteGenerator.Pages
     public partial class Constructor : Page
     {
         //head
-        int headX = 1;
-        int headY = 1;
-        int headWidth = 25;
-        int headHeight = 22;
+        int headX = App.headX;
+        int headY = App.headY;
+        int headWidth = App.headWidth;
+        int headHeight = App.headHeight;
 
         //body
-        int bodyX = 1;
-        int bodyY = 1;
-        int bodyWidth = 25;
-        int bodyHeight = 22;
+        int bodyX = App.bodyX;
+        int bodyY = App.bodyY;
+        int bodyWidth = App.bodyWidth;
+        int bodyHeight = App.bodyHeight;
 
         //legs
-        int legsX = 1;
-        int legsY = 1;
-        int legsWidth = 15;
-        int legsHeight = 17;
+        int legsX = App.legsX;
+        int legsY = App.legsY;
+        int legsWidth = App.legsWidth;
+        int legsHeight = App.legsHeight;
 
-        BitmapImage head = new BitmapImage(new Uri("../../Images/Heads/classic.png", UriKind.Relative));
-        BitmapImage body = new BitmapImage(new Uri("../../Images/Bodies/classic.png", UriKind.Relative));
-        BitmapImage legs = new BitmapImage(new Uri("../../Images/Legs/classic.png", UriKind.Relative));
+        //BitmapImage head = new BitmapImage(new Uri("../../Images/Heads/classic.png", UriKind.Relative));
+        //BitmapImage body = new BitmapImage(new Uri("../../Images/Bodies/classic.png", UriKind.Relative));
+        //BitmapImage legs = new BitmapImage(new Uri("../../Images/Legs/classic.png", UriKind.Relative));
+
+        BitmapImage head = new BitmapImage(new Uri(App.HeadsPath, UriKind.Relative));
+        BitmapImage body = new BitmapImage(new Uri(App.BodiesPath, UriKind.Relative));
+        BitmapImage legs = new BitmapImage(new Uri(App.LegsPath, UriKind.Relative));
 
 
         public Constructor()
@@ -51,7 +55,7 @@ namespace SpriteGenerator.Pages
                 96, // dpiY
                 PixelFormats.Bgra32, // pixel format
                 null); // bitmap pallete
-
+            
             BitmapSource headSource = new CroppedBitmap(head, new Int32Rect(headX, headY, headWidth, headHeight));
             BitmapSource bodySource = new CroppedBitmap(body, new Int32Rect(bodyX, bodyY, bodyWidth, bodyHeight));
             BitmapSource legsSource = new CroppedBitmap(legs, new Int32Rect(legsX, legsY, legsWidth, legsHeight));

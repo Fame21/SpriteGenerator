@@ -41,6 +41,7 @@
                 <Button Width="100" Margin="10,0,10,0" Name="DeleteHead"  Content="Delete Selected" Click="DeleteHead_Click" />
                 <Button Width="100" Name="UploadHead" Content="Upload File" Click="UploadHead_Click" />
             </StackPanel>
+            <Image x:Name="HeadImageControl"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <TextBlock Text="Body" 
@@ -62,6 +63,7 @@
                 <Button Width="100" Margin="10,0,10,0" Name="DeleteBody" Content="Delete Selected" Click="DeleteBody_Click" />
                 <Button Width="100" Name="UploadBody" Content="Upload File" Click="UploadBody_Click" />
             </StackPanel>
+            <Image x:Name="BodyImageControl"/>
         </StackPanel>
         <StackPanel Grid.Row="2">
             <TextBlock Text="Legs" 
@@ -83,6 +85,7 @@
                 <Button Width="100" Margin="10,0,10,0" Name="DeleteLegs" Content="Delete Selected" Click="DeleteLegs_Click" />
                 <Button Width="100" Name="UploadLegs" Content="Upload File" Click="UploadLegs_Click" />
             </StackPanel>
+            <Image x:Name="LegsImageControl"/>
         </StackPanel>
         <StackPanel Grid.Row="3" 
                     HorizontalAlignment="Center" 

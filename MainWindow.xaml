@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpriteGenerator"
         mc:Ignorable="d"
         Title="CSC" 
-        Width="800" Height="600"
+        Width="1000" Height="800"
         MinWidth="800" MinHeight="800"
         Background="Transparent">
 
@@ -57,6 +57,16 @@
                         FontSize="22" 
                         Click="BtnClickTemplates">
                     <TextBlock Text="Управление шаблонами" 
+                               TextWrapping="Wrap" TextAlignment="Center"/>
+                </Button>
+                <Button Name="BtnAnimation"
+                        Height="75"
+                        Foreground="White"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="22" 
+                        Click="BtnClickAnimation">
+                    <TextBlock Text="Анимация" 
                                TextWrapping="Wrap" TextAlignment="Center"/>
                 </Button>
             </StackPanel>

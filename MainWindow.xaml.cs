@@ -56,5 +56,15 @@ namespace SpriteGenerator
                 _lastClickedBtn = (Button)sender;
             }
         }
+
+        private void BtnClickAnimation(object sender, RoutedEventArgs e)
+        {
+            if (_lastClickedBtn != (Button)sender)
+            {
+                Main.Content = new Pages.AnimationPage();
+                BtnChangeState(_lastClickedBtn, (Button)sender);
+                _lastClickedBtn = (Button)sender;
+            }
+        }
     }
 }

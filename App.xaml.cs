@@ -1,8 +1,5 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace SpriteGenerator
@@ -17,9 +14,18 @@ namespace SpriteGenerator
         public static BitmapImage DefaultBodyTemplate { get; set; }
         public static BitmapImage DefaultLegsTemplate { get; set; }
 
+
+
         public static string HeadsPath = "../../Images/Heads/classic.png"; // замените на нужный путь
         public static string BodiesPath = "../../Images/Bodies/classic.png"; // замените на нужный путь
         public static string LegsPath = "../../Images/Legs/classic.png"; // замените на нужный путь
+
+        public static void ResetPaths()
+        {
+            HeadsPath = "../../Images/Heads/classic.png"; // замените на нужный путь
+            BodiesPath = "../../Images/Bodies/classic.png"; // замените на нужный путь
+            LegsPath = "../../Images/Legs/classic.png"; // замените на нужный путь
+        }
 
         public static string GetNextFileName(string fileName)
         {

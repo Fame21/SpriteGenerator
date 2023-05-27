@@ -32,9 +32,13 @@ namespace SpriteGenerator.Pages
         {
             try
             {
+
                 ChangeImageControlSource(HeadImageControl, App.HeadsPath);
                 ChangeImageControlSource(BodyImageControl, App.BodiesPath);
                 ChangeImageControlSource(LegsImageControl, App.LegsPath);
+                HeadName.Text = Path.GetFileNameWithoutExtension(App.HeadsPath);
+                BodyName.Text = Path.GetFileNameWithoutExtension(App.BodiesPath);
+                LegsName.Text = Path.GetFileNameWithoutExtension(App.LegsPath);
             }
             catch (Exception ex)
             {
@@ -57,16 +61,12 @@ namespace SpriteGenerator.Pages
             {
                 App.HeadsPath = LoadStringFromDialog();
                 ChangeImageControlSource(HeadImageControl, App.HeadsPath);
+                HeadName.Text = Path.GetFileNameWithoutExtension(App.HeadsPath);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void DeleteHead_Click(object sender, RoutedEventArgs e)
-        {
-            //
         }
 
         private void UploadBody_Click(object sender, RoutedEventArgs e)
@@ -75,16 +75,12 @@ namespace SpriteGenerator.Pages
             {
                 App.BodiesPath = LoadStringFromDialog();
                 ChangeImageControlSource(BodyImageControl, App.BodiesPath);
+                BodyName.Text = Path.GetFileNameWithoutExtension(App.BodiesPath);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void DeleteBody_Click(object sender, RoutedEventArgs e)
-        {
-            //
         }
         private void UploadLegs_Click(object sender, RoutedEventArgs e)
         {
@@ -92,21 +88,12 @@ namespace SpriteGenerator.Pages
             {
                 App.LegsPath = LoadStringFromDialog();
                 ChangeImageControlSource(LegsImageControl, App.LegsPath);
+                LegsName.Text = Path.GetFileNameWithoutExtension(App.LegsPath);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void DeleteLegs_Click(object sender, RoutedEventArgs e)
-        {
-            //
-        }
-        private void Apply_Click(object sender, RoutedEventArgs e)
-        {
-            //
-        }
-
-
     }
 }

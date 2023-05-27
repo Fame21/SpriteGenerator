@@ -17,31 +17,39 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="Head" 
+        <StackPanel Grid.Row="0" Margin="0 25 0 0">
+            <TextBlock Text="Head"
                        TextWrapping="Wrap" 
                        FontSize="28"
                        FontWeight="Bold"
                        Foreground="White"
                        TextAlignment="Center"/>
             <StackPanel Grid.Row="0"
-                        Height="35"
+                        Height="50"
                         HorizontalAlignment="Center" 
                         Orientation="Horizontal" 
                         Margin="10,20">
                 <TextBlock Text="TemplateName" 
+                           x:Name="HeadName"
                            TextWrapping="Wrap" 
-                           FontSize="28"
+                           FontSize="24"
                            FontWeight="Bold"
                            Foreground="White"
                            TextAlignment="Center"/>
-                <Button Width="100" Margin="10,0,10,0" Name="DeleteHead"  Content="Delete Selected" Click="DeleteHead_Click" />
-                <Button Width="100" Name="UploadHead" Content="Upload File" Click="UploadHead_Click" />
+                <Button Width="130"
+                        Foreground="White"
+                        Background="#151525"
+                        BorderThickness="0"
+                        FontSize="20"
+                        Name="UploadHead" 
+                        Margin="50 0 0 0" 
+                        Content="Upload File" 
+                        Click="UploadHead_Click" />
             </StackPanel>
-            <Image x:Name="HeadImageControl"/>
+            <Image x:Name="HeadImageControl"
+                   RenderOptions.BitmapScalingMode="NearestNeighbor"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <TextBlock Text="Body" 
@@ -50,20 +58,29 @@
                        FontWeight="Bold"
                        Foreground="White"
                        TextAlignment="Center"/>
-            <StackPanel Height="35"
+            <StackPanel Height="50"
                         HorizontalAlignment="Center" 
                         Orientation="Horizontal" 
                         Margin="10,20">
                 <TextBlock Text="TemplateName" 
                            TextWrapping="Wrap" 
-                           FontSize="28"
+                           x:Name="BodyName"
+                           FontSize="24"
                            FontWeight="Bold"
                            Foreground="White"
                            TextAlignment="Center"/>
-                <Button Width="100" Margin="10,0,10,0" Name="DeleteBody" Content="Delete Selected" Click="DeleteBody_Click" />
-                <Button Width="100" Name="UploadBody" Content="Upload File" Click="UploadBody_Click" />
+                <Button Width="130"
+                        Foreground="White"
+                        Background="#151525"
+                        BorderThickness="0"
+                        FontSize="20"
+                        Name="UploadBody" 
+                        Margin="50 0 0 0" 
+                        Content="Upload File" 
+                        Click="UploadBody_Click" />
             </StackPanel>
-            <Image x:Name="BodyImageControl"/>
+            <Image x:Name="BodyImageControl"
+                   RenderOptions.BitmapScalingMode="NearestNeighbor"/>
         </StackPanel>
         <StackPanel Grid.Row="2">
             <TextBlock Text="Legs" 
@@ -72,26 +89,29 @@
                        FontWeight="Bold"
                        Foreground="White"
                        TextAlignment="Center"/>
-            <StackPanel Height="35"
+            <StackPanel Height="50"
                         HorizontalAlignment="Center" 
                         Orientation="Horizontal" 
                         Margin="10,20">
                 <TextBlock Text="TemplateName" 
                            TextWrapping="Wrap" 
-                           FontSize="28"
+                           FontSize="24"
+                           x:Name="LegsName"
                            FontWeight="Bold"
                            Foreground="White"
                            TextAlignment="Center"/>
-                <Button Width="100" Margin="10,0,10,0" Name="DeleteLegs" Content="Delete Selected" Click="DeleteLegs_Click" />
-                <Button Width="100" Name="UploadLegs" Content="Upload File" Click="UploadLegs_Click" />
+                <Button Width="130" 
+                        Name="UploadLegs" 
+                        Margin="50 0 0 0" 
+                        Content="Upload File" 
+                        Click="UploadLegs_Click" 
+                        Foreground="White"
+                        Background="#151525"
+                        BorderThickness="0"
+                        FontSize="20"/>
             </StackPanel>
-            <Image x:Name="LegsImageControl"/>
-        </StackPanel>
-        <StackPanel Grid.Row="3" 
-                    HorizontalAlignment="Center" 
-                    Orientation="Horizontal" 
-                    Margin="10,20">
-            <Button Width="200" Name="Apply" Content="Apply Selected" Click="Apply_Click" />
+            <Image x:Name="LegsImageControl"
+                   RenderOptions.BitmapScalingMode="NearestNeighbor"/>
         </StackPanel>
     </Grid>
 </Page>

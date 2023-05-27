@@ -1,0 +1,78 @@
+﻿<Page x:Class="SpriteGenerator.Pages.AnimationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SpriteGenerator.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AnimationPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition MinWidth="300"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <Label Content="Preview"
+                   Foreground="White"
+                   Margin="0 25 0 0"
+                   FontSize="18"
+                   Height="50"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   FontWeight="Bold"/>
+            <Image x:Name="PreviewImageControl"
+                   VerticalAlignment="Stretch"
+                   MaxWidth="400"
+                   RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+        </StackPanel>
+        
+
+        <StackPanel Grid.Column="10">
+            <Button Margin="0 25 0 0"
+                    Height="50"
+                    Content="Load sprite"
+                    Background="#151525"
+                    BorderThickness="0"
+                    Foreground="White"
+                    FontSize="28"
+                    FontWeight="Bold" Cursor="Hand"
+                    Click="UploadSprite_Click"/>
+            <Label Content="SpriteName"
+                   x:Name="SpriteNameControl"
+                   Foreground="White"
+                   Margin="0 25 0 0"
+                   FontSize="18"
+                   Height="50"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   FontWeight="Bold"/>
+            <StackPanel HorizontalAlignment="Center"
+                        Margin="0 25 0 0"
+                        Orientation="Horizontal">
+                <ToggleButton Content="BackFlip" Height="50" Width="75"
+                              Background="#151525"
+                              BorderThickness="0"
+                              Foreground="White"
+                              FontWeight="Bold"/>
+                <ToggleButton Content="Jump" Margin="30 0" Height="50" Width="75"
+                              Background="#151525"
+                              BorderThickness="0"
+                              Foreground="White"
+                              FontWeight="Bold"/>
+                <ToggleButton Content="FrontFlip" Height="50" Width="75"
+                              Background="#151525"
+                              BorderThickness="0"
+                              Foreground="White"
+                              FontWeight="Bold"/>
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Page>

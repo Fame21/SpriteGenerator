@@ -39,6 +39,12 @@ namespace SpriteGenerator.Pages
         BitmapImage body = new BitmapImage(new Uri(App.BodiesPath, UriKind.Relative));
         BitmapImage legs = new BitmapImage(new Uri(App.LegsPath, UriKind.Relative));
 
+        private void SetTemplates()
+        {
+            head = new BitmapImage(new Uri(App.HeadsPath, UriKind.Relative));
+            body = new BitmapImage(new Uri(App.BodiesPath, UriKind.Relative));
+            legs = new BitmapImage(new Uri(App.LegsPath, UriKind.Relative));
+        }
 
         public Constructor()
         {
@@ -55,10 +61,25 @@ namespace SpriteGenerator.Pages
                 96, // dpiY
                 PixelFormats.Bgra32, // pixel format
                 null); // bitmap pallete
-            
-            BitmapSource headSource = new CroppedBitmap(head, new Int32Rect(headX, headY, headWidth, headHeight));
-            BitmapSource bodySource = new CroppedBitmap(body, new Int32Rect(bodyX, bodyY, bodyWidth, bodyHeight));
-            BitmapSource legsSource = new CroppedBitmap(legs, new Int32Rect(legsX, legsY, legsWidth, legsHeight));
+
+            BitmapSource headSource = null;
+            BitmapSource bodySource = null;
+            BitmapSource legsSource = null;
+            try
+            {
+                headSource = new CroppedBitmap(head, new Int32Rect(headX, headY, headWidth, headHeight));
+                bodySource = new CroppedBitmap(body, new Int32Rect(bodyX, bodyY, bodyWidth, bodyHeight));
+                legsSource = new CroppedBitmap(legs, new Int32Rect(legsX, legsY, legsWidth, legsHeight));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Выбранные шаблоны не соответствуют необходимым размерам. Будут установлены стандартные шаблоны.");
+                App.ResetPaths();
+                SetTemplates(); 
+                headSource = new CroppedBitmap(head, new Int32Rect(headX, headY, headWidth, headHeight));
+                bodySource = new CroppedBitmap(body, new Int32Rect(bodyX, bodyY, bodyWidth, bodyHeight));
+                legsSource = new CroppedBitmap(legs, new Int32Rect(legsX, legsY, legsWidth, legsHeight));
+            }
 
             byte[] headPixels = BitmapSourceToArray(headSource);
             byte[] bodyPixels = BitmapSourceToArray(bodySource);

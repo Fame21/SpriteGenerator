@@ -26,46 +26,44 @@
             </Grid.RowDefinitions>
 
 
-            
 
-            <StackPanel Grid.Row="1"
-                        Margin="0 75 0 0">
+
+            <StackPanel Background="#454565"
+                        Margin="0 0 0 0">
                 <Button Content="Конструктор"
                         Name="BtnConstructor"
                         Height="75"
-                        Foreground="White"
-                        Background="#151525"
                         BorderThickness="0"
                         FontSize="22"
+                        Margin="0 75 0 0"
                         Click="BtnClickConstructor"
+                        Style="{StaticResource ButtonStyle}"
                         />
                 <Button Name="BtnSaved"
                         Height="75"
-                        Foreground="White"
-                        Background="Transparent"
                         BorderThickness="0"
                         FontSize="22" 
-                        Click="BtnClickSaved">
+                        Click="BtnClickSaved"
+                        Style="{StaticResource ButtonStyle}">
+                    
                     <TextBlock Text="Сохраненные спрайты" 
                                TextWrapping="Wrap" TextAlignment="Center"/>
                 </Button>
                 <Button Name="BtnTemplates"
                         Height="75"
-                        Foreground="White"
-                        Background="Transparent"
                         BorderThickness="0"
                         FontSize="22" 
-                        Click="BtnClickTemplates">
+                        Click="BtnClickTemplates"
+                        Style="{StaticResource ButtonStyle}">
                     <TextBlock Text="Управление шаблонами" 
                                TextWrapping="Wrap" TextAlignment="Center"/>
                 </Button>
                 <Button Name="BtnAnimation"
                         Height="75"
-                        Foreground="White"
-                        Background="Transparent"
                         BorderThickness="0"
                         FontSize="22" 
-                        Click="BtnClickAnimation">
+                        Click="BtnClickAnimation"
+                        Style="{StaticResource ButtonStyle}">
                     <TextBlock Text="Анимация" 
                                TextWrapping="Wrap" TextAlignment="Center"/>
                 </Button>
@@ -78,10 +76,5 @@
 
 
         </Grid>
-
-
-
-
-
     </Border> 
 </Window>

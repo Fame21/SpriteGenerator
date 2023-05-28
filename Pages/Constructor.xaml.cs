@@ -75,17 +75,17 @@ namespace SpriteGenerator.Pages
             {
                 MessageBox.Show("Выбранные шаблоны не соответствуют необходимым размерам. Будут установлены стандартные шаблоны.");
                 App.ResetPaths();
-                SetTemplates(); 
+                SetTemplates();
                 headSource = new CroppedBitmap(head, new Int32Rect(headX, headY, headWidth, headHeight));
                 bodySource = new CroppedBitmap(body, new Int32Rect(bodyX, bodyY, bodyWidth, bodyHeight));
                 legsSource = new CroppedBitmap(legs, new Int32Rect(legsX, legsY, legsWidth, legsHeight));
             }
 
-            byte[] headPixels = BitmapSourceToArray(headSource);
-            byte[] bodyPixels = BitmapSourceToArray(bodySource);
-            byte[] legsPixels = BitmapSourceToArray(legsSource);
+            byte[] headPixels = App.BitmapSourceToArray(headSource);
+            byte[] bodyPixels = App.BitmapSourceToArray(bodySource);
+            byte[] legsPixels = App.BitmapSourceToArray(legsSource);
 
-            byte[] amalgamPixels = BitmapSourceToArray(amalgam);
+            byte[] amalgamPixels = App.BitmapSourceToArray(amalgam);
             int amalgamPixelsIdx;
             int PixelsIdx;
             for (int i = 0; i < legsSource.PixelHeight; i++)
@@ -143,15 +143,6 @@ namespace SpriteGenerator.Pages
             amalgam.WritePixels(new Int32Rect(0, 0, 27, 49), amalgamPixels, amalgam.PixelWidth * (amalgam.Format.BitsPerPixel / 8), 0);
             return amalgam;
         }
-
-        private byte[] BitmapSourceToArray(BitmapSource bitmapSource)
-        {
-            int stride = (int)bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
-            byte[] pixels = new byte[(int)bitmapSource.PixelHeight * stride];
-            bitmapSource.CopyPixels(pixels, stride, 0);
-            return pixels;
-        }
-
 
 
         private void Update()

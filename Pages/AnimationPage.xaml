@@ -28,7 +28,8 @@
             <Image x:Name="PreviewImageControl"
                    VerticalAlignment="Stretch"
                    MaxWidth="400"
-                   RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                   MaxHeight="900"
+                   RenderOptions.BitmapScalingMode="NearestNeighbor" Cursor=""/>
         </StackPanel>
         
 
@@ -36,12 +37,11 @@
             <Button Margin="0 25 0 0"
                     Height="50"
                     Content="Load sprite"
-                    Background="#151525"
                     BorderThickness="0"
-                    Foreground="White"
                     FontSize="28"
                     FontWeight="Bold" Cursor="Hand"
-                    Click="UploadSprite_Click"/>
+                    Click="UploadSprite_Click"
+                    Style="{StaticResource ButtonStyle}"/>
             <Label Content="SpriteName"
                    x:Name="SpriteNameControl"
                    Foreground="White"
@@ -72,7 +72,16 @@
                               Foreground="White"
                               FontWeight="Bold"/>
             </StackPanel>
-            
+            <Button Content="Export .GIF file"
+                    Margin="0 25 0 0"
+                    Height="50"
+                    Background="#151525"
+                    BorderThickness="0"
+                    Foreground="White"
+                    FontSize="28"
+                    FontWeight="Bold" Cursor="Hand"
+                    Click="ExportGIF"
+                    />
         </StackPanel>
     </Grid>
 </Page>

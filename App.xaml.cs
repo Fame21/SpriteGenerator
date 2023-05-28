@@ -1,6 +1,10 @@
-﻿using System.IO;
+﻿using System.Drawing;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using ImageMagick;
+using System.Drawing.Imaging;
 
 namespace SpriteGenerator
 {
@@ -27,6 +31,31 @@ namespace SpriteGenerator
             LegsPath = "../../Images/Legs/classic.png"; // замените на нужный путь
         }
 
+        public static IMagickImage ToMagickImage(Bitmap bmp)
+        {
+            IMagickImage img = null;
+            MagickFactory f = new MagickFactory();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bmp.Save(ms, ImageFormat.Bmp);
+                ms.Position = 0;
+                img = new MagickImage(f.Image.Create(ms));
+            }
+            return img;
+        }
+
+        public static byte[] BitmapSourceToArray(BitmapSource bitmapSource)
+        {
+            /*
+             * Здесь мы вычисляем ширину одной строки пикселей в байтах. 
+             * PixelWidth представляет ширину изображения в пикселях, а BitsPerPixel - количество битов на пиксель в формате изображения. 
+             * Для вычисления ширины строки умножаем ширину изображения на количество байтов на пиксель и делим на 8.
+             */
+            int stride = (int)bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
+            byte[] pixels = new byte[(int)bitmapSource.PixelHeight * stride];
+            bitmapSource.CopyPixels(pixels, stride, 0);
+            return pixels;
+        }
         public static string GetNextFileName(string fileName)
         {
             string extension = Path.GetExtension(fileName);
@@ -60,6 +89,8 @@ namespace SpriteGenerator
         public static int legsWidth = 15;
         public static int legsHeight = 17;
 
-
+        //final size
+        public static int FinalWidth = 27;
+        public static int FinalHeight = 49;
     }
 }

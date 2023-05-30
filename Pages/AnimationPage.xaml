@@ -3,18 +3,19 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       xmlns:local="clr-namespace:SpriteGenerator.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="650"
       Title="AnimationPage">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition MinWidth="300"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="550"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical">
+        <StackPanel Orientation="Vertical">
             <Label Content="Preview"
                    Foreground="White"
                    Margin="0 25 0 0"
@@ -26,16 +27,15 @@
                    HorizontalContentAlignment="Center"
                    FontWeight="Bold"/>
             <Image x:Name="PreviewImageControl"
-                   VerticalAlignment="Stretch"
-                   MaxWidth="400"
-                   MaxHeight="900"
+                   MaxHeight="525"
+                   gif:ImageBehavior.AnimatedSource="\SavedSprites\default\default.png"
                    RenderOptions.BitmapScalingMode="NearestNeighbor" Cursor=""/>
         </StackPanel>
-        
 
-        <StackPanel Grid.Column="10">
-            <Button Margin="0 25 0 0"
-                    Height="50"
+
+        <StackPanel Grid.Row="10"
+                    VerticalAlignment="Bottom">
+            <Button Height="50"
                     Content="Load sprite"
                     BorderThickness="0"
                     FontSize="28"
@@ -45,7 +45,6 @@
             <Label Content="SpriteName"
                    x:Name="SpriteNameControl"
                    Foreground="White"
-                   Margin="0 25 0 0"
                    FontSize="18"
                    Height="50"
                    HorizontalAlignment="Stretch"
@@ -54,30 +53,36 @@
                    HorizontalContentAlignment="Center"
                    FontWeight="Bold"/>
             <StackPanel HorizontalAlignment="Center"
-                        Margin="0 25 0 0"
                         Orientation="Horizontal">
-                <ToggleButton Content="BackFlip" Height="50" Width="75"
-                              Background="#151525"
+
+                <Button Content="BackFlip" Height="50" Width="125" 
+                        x:Name="BackFlip_Btn"
+                        Click="BackFlip_Click"
                               BorderThickness="0"
-                              Foreground="White"
+                              FontSize="20"
+                              Style="{DynamicResource ButtonStyle}"
                               FontWeight="Bold"/>
-                <ToggleButton Content="Jump" Margin="30 0" Height="50" Width="75"
-                              Background="#151525"
-                              BorderThickness="0"
-                              Foreground="White"
+                <Button Content="Jump" Margin="30 0" Height="50" Width="125"
+                        x:Name="Jump_Btn"
+                        Click="Jump_Click"
+                        BorderThickness="0"
+                              FontSize="20"
+                              Style="{DynamicResource ButtonStyle}"
                               FontWeight="Bold"/>
-                <ToggleButton Content="FrontFlip" Height="50" Width="75"
-                              Background="#151525"
+                <Button Content="FrontFlip" Height="50" Width="125"
+                        x:Name="FrontFlip_Btn"
+                        Click="FrontFlip_Click"
                               BorderThickness="0"
-                              Foreground="White"
+                              FontSize="20"
+                              Style="{DynamicResource ButtonStyle}"
                               FontWeight="Bold"/>
             </StackPanel>
+
+            
             <Button Content="Export .GIF file"
-                    Margin="0 25 0 0"
                     Height="50"
-                    Background="#151525"
                     BorderThickness="0"
-                    Foreground="White"
+                    Style="{DynamicResource ButtonStyle}"
                     FontSize="28"
                     FontWeight="Bold" Cursor="Hand"
                     Click="ExportGIF"

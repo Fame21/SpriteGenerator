@@ -39,14 +39,13 @@
                            Foreground="White"
                            TextAlignment="Center"/>
                 <Button Width="130"
-                        Foreground="White"
-                        Background="#151525"
                         BorderThickness="0"
                         FontSize="20"
                         Name="UploadHead" 
                         Margin="50 0 0 0" 
                         Content="Upload File" 
-                        Click="UploadHead_Click" />
+                        Click="UploadHead_Click"
+                        Style="{DynamicResource ButtonStyle}"/>
             </StackPanel>
             <Image x:Name="HeadImageControl"
                    RenderOptions.BitmapScalingMode="NearestNeighbor"/>
@@ -70,14 +69,13 @@
                            Foreground="White"
                            TextAlignment="Center"/>
                 <Button Width="130"
-                        Foreground="White"
-                        Background="#151525"
                         BorderThickness="0"
                         FontSize="20"
                         Name="UploadBody" 
                         Margin="50 0 0 0" 
                         Content="Upload File" 
-                        Click="UploadBody_Click" />
+                        Click="UploadBody_Click"
+                        Style="{DynamicResource ButtonStyle}" />
             </StackPanel>
             <Image x:Name="BodyImageControl"
                    RenderOptions.BitmapScalingMode="NearestNeighbor"/>
@@ -105,10 +103,9 @@
                         Margin="50 0 0 0" 
                         Content="Upload File" 
                         Click="UploadLegs_Click" 
-                        Foreground="White"
-                        Background="#151525"
                         BorderThickness="0"
-                        FontSize="20"/>
+                        FontSize="20"
+                        Style="{DynamicResource ButtonStyle}"/>
             </StackPanel>
             <Image x:Name="LegsImageControl"
                    RenderOptions.BitmapScalingMode="NearestNeighbor"/>

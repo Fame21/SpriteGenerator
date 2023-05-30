@@ -23,7 +23,7 @@ namespace SpriteGenerator
         {
             //sender.IsEnabled = false;
             //lastClickedBtn.IsEnabled = true;
-            lastClickedBtn.Background = (Brush)(bc.ConvertFrom("#454560"));
+            lastClickedBtn.Background = (Brush)(bc.ConvertFrom("#353545"));
             sender.Background = (Brush)bc.ConvertFrom("#151525");
         }
 

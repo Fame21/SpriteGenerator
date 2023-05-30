@@ -120,10 +120,6 @@ namespace SpriteGenerator.Pages
 
             savingPath = App.GetNextFileName(savingPath);
 
-
-
-
-
             try
             {
                 using (FileStream fileStream = new FileStream(savingPath, FileMode.Create))
@@ -142,8 +138,6 @@ namespace SpriteGenerator.Pages
                 MessageBox.Show(exeption.Message);
                 return;
             }
-
-
         }
         private void DeleteSelectedSprite(object sender, RoutedEventArgs e)
         {

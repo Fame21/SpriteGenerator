@@ -476,8 +476,6 @@
                 Grid.ColumnSpan="3"
                 Content="Экспортировать спрайт"
                 Cursor="Hand"
-                Foreground="White"
-                Background="#151525"
                 BorderThickness="0"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
@@ -485,7 +483,8 @@
                 VerticalAlignment="Stretch"
                 FontSize="28"
                 FontWeight="Bold"
-                Click="SaveSelectedSprite"/>
+                Click="SaveSelectedSprite"
+                Style="{DynamicResource ButtonStyle}"/>
 
         <!-- Save Button -->
         <Button Grid.Row="100" 
@@ -494,8 +493,6 @@
                 Margin="0 0 15 0"
                 Content="Удалить"
                 Cursor="Hand"
-                Foreground="White"
-                Background="#151525"
                 BorderThickness="0"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
@@ -503,7 +500,8 @@
                 VerticalAlignment="Stretch"
                 FontSize="28"
                 FontWeight="Bold"
-                Click="DeleteSelectedSprite"/>
+                Click="DeleteSelectedSprite"
+                Style="{DynamicResource ButtonStyle}"/>
 
 
     </Grid>

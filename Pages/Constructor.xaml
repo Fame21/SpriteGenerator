@@ -35,8 +35,8 @@
                 Grid.ColumnSpan="2"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Foreground="White"
                 Background="Transparent"
+                Foreground="White"
                 MinWidth="200"
                 TextAlignment="Center"
                 FontSize="30"
@@ -51,11 +51,11 @@
                 VerticalContentAlignment="Center"
                 Background="Transparent"
                 BorderThickness="0"
-                Foreground="White"
                 HorizontalContentAlignment="Center"
                 FontSize="50"
                 FontFamily="Marlett"
-                Click="PrevHead"/>
+                Click="PrevHead"
+                Style="{DynamicResource ButtonStyle}"/>
         <!-- Body Left -->
         <Button Grid.Row="2" 
                 Grid.Column="0" 
@@ -63,10 +63,10 @@
                 VerticalContentAlignment="Center"
                 Background="Transparent"
                 BorderThickness="0"
-                Foreground="White"
                 Cursor="Hand"
                 FontSize="50"
-                FontFamily="Marlett" Click="PrevBody"/>
+                FontFamily="Marlett" Click="PrevBody"
+                Style="{DynamicResource ButtonStyle}"/>
 
         <!-- Legs Left -->
         <Button Grid.Row="3" 
@@ -75,11 +75,11 @@
                 VerticalContentAlignment="Center"
                 Background="Transparent"
                 BorderThickness="0"
-                Foreground="White"
                 Cursor="Hand"
                 FontSize="50"
                 FontFamily="Marlett"
-                Click="PrevLegs"/>
+                Click="PrevLegs"
+                Style="{DynamicResource ButtonStyle}"/>
 
 
         <!-- Head Right -->
@@ -89,13 +89,13 @@
                 VerticalContentAlignment="Center"
                 Background="Transparent"
                 BorderThickness="0"
-                Foreground="White"
                 Cursor="Hand"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 FontSize="50"
                 FontFamily="Marlett" 
-                Click="NextHead"/>
+                Click="NextHead"
+                Style="{DynamicResource ButtonStyle}"/>
         <!-- Body Right -->
         <Button Grid.Row="2" 
                 Grid.Column="3" 
@@ -103,13 +103,13 @@
                 VerticalContentAlignment="Center"
                 Background="Transparent"
                 BorderThickness="0"
-                Foreground="White"
                 Cursor="Hand"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 FontSize="50"
                 FontFamily="Marlett"
-                Click="NextBody"/>
+                Click="NextBody"
+                Style="{DynamicResource ButtonStyle}"/>
         <!-- Legs Right -->
         <Button Grid.Row="3" 
                 Grid.Column="3" 
@@ -118,12 +118,12 @@
                 Cursor="Hand"
                 Background="Transparent"
                 BorderThickness="0"
-                Foreground="White"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 FontSize="50"
                 FontFamily="Marlett"
-                Click="NextLegs"/>
+                Click="NextLegs"
+                Style="{DynamicResource ButtonStyle}"/>
 
 
 
@@ -140,32 +140,30 @@
                 Content="Сохранить спрайт"
                 Margin="0 0 10 0"
                 Cursor="Hand"
-                Background="#151525"
                 BorderThickness="0"
-                Foreground="White"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 FontSize="28"
                 FontWeight="Bold"
-                Click="SaveSprite"/>
+                Click="SaveSprite"
+                        Style="{DynamicResource ButtonStyle}"/>
 
         <Button Grid.Row="4" 
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 Margin="10 0 0 0"
                 Cursor="Hand"
-                Background="#151525"
                 BorderThickness="0"
-                Foreground="White"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 FontSize="28"
                 FontWeight="Bold"
-                Click="ExportSprite">
+                Click="ExportSprite"
+                        Style="{DynamicResource ButtonStyle}">
             <TextBlock Text="Экспортировать спрайт" 
                        TextWrapping="Wrap" 
                        TextAlignment="Center"/>

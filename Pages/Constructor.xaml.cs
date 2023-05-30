@@ -49,6 +49,7 @@ namespace SpriteGenerator.Pages
         public Constructor()
         {
             InitializeComponent();
+
             Update();
         }
 

@@ -38,18 +38,14 @@ namespace SpriteGenerator.Pages
             int pageInc = (id - 1) * 15;
             for (int i = 0; i < 15; i++)
             {
-
                 TextBlock nameControl = ((TextBlock)this.FindName($"Name{i + 1}"));
                 Image imageControl = (Image)FindName($"Pic{i + 1}");
-
                 try
                 {
-
                     BitmapImage bitmap = new BitmapImage();
                     bitmap.BeginInit();
                     bitmap.UriSource = new Uri(Path.GetFullPath(imageFiles[i + pageInc]));
                     bitmap.EndInit();
-
                     imageControl.Source = bitmap;
                     nameControl.Text = Path.GetFileNameWithoutExtension(imageFiles[i + pageInc]);
                 }

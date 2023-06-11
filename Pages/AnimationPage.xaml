@@ -16,18 +16,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Vertical">
-            <Label Content="Preview"
-                   Foreground="White"
-                   Margin="0 25 0 0"
-                   FontSize="18"
-                   Height="50"
-                   HorizontalAlignment="Stretch"
-                   VerticalAlignment="Center"
-                   VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   FontWeight="Bold"/>
+           
             <Image x:Name="PreviewImageControl"
-                   MaxHeight="525"
+                   MaxHeight="550"
                    gif:ImageBehavior.AnimatedSource="\SavedSprites\default\default.png"
                    RenderOptions.BitmapScalingMode="NearestNeighbor" Cursor=""/>
         </StackPanel>
@@ -36,7 +27,7 @@
         <StackPanel Grid.Row="10"
                     VerticalAlignment="Bottom">
             <Button Height="50"
-                    Content="Load sprite"
+                    Content="Загрузить изображение"
                     BorderThickness="0"
                     FontSize="28"
                     FontWeight="Bold" Cursor="Hand"
@@ -55,21 +46,21 @@
             <StackPanel HorizontalAlignment="Center"
                         Orientation="Horizontal">
 
-                <Button Content="BackFlip" Height="50" Width="125" 
+                <Button Content="Кувырок назад" Height="50" Width="200" 
                         x:Name="BackFlip_Btn"
                         Click="BackFlip_Click"
                               BorderThickness="0"
                               FontSize="20"
                               Style="{DynamicResource ButtonStyle}"
                               FontWeight="Bold"/>
-                <Button Content="Jump" Margin="30 0" Height="50" Width="125"
+                <Button Content="Прыжок" Margin="30 0" Height="50" Width="125"
                         x:Name="Jump_Btn"
                         Click="Jump_Click"
                         BorderThickness="0"
                               FontSize="20"
                               Style="{DynamicResource ButtonStyle}"
                               FontWeight="Bold"/>
-                <Button Content="FrontFlip" Height="50" Width="125"
+                <Button Content="Кувырок вперед" Height="50" Width="200"
                         x:Name="FrontFlip_Btn"
                         Click="FrontFlip_Click"
                               BorderThickness="0"
@@ -79,7 +70,7 @@
             </StackPanel>
 
             
-            <Button Content="Export .GIF file"
+            <Button Content="Экспортировать анимацию"
                     Height="50"
                     BorderThickness="0"
                     Style="{DynamicResource ButtonStyle}"

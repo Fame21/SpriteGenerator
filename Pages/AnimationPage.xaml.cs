@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SpriteGenerator.Pages
 {
@@ -50,6 +51,12 @@ namespace SpriteGenerator.Pages
             {
             }
         }
+
+
+        int totalFrames = 30; //Количетво кадров в анимации
+        int animationDelay = 5; //Задержка между кадрами
+
+
         private void SaveJumpAnimation()
         {
             //try
@@ -60,53 +67,41 @@ namespace SpriteGenerator.Pages
 
             // Создание коллекции кадров для анимации
             MagickImageCollection frames = new MagickImageCollection();
-
-            // Число кадров в анимации
-            int totalFrames = 30;
-
-            // Задержка между кадрами (в миллисекундах)
-            int animationDelay = 11; // Например, 100 мс
-
             // Загрузка исходного изображения
             using (MagickImage sourceImage = new MagickImage(loadedSprite))
             {
-                // Расчет пикселей смещения для движения вверх и вниз
-                int offsetY = sourceImage.Height / 15;
-                int newHeight = sourceImage.Height + offsetY * 15;
-                sourceImage.Extent(sourceImage.Width, newHeight, Gravity.South, MagickColors.White);
-                // Добавление первого кадра (исходное изображение)
-                frames.Add(sourceImage.Clone());
+                float currentAngle = 0;
+                var offsetY = sourceImage.Height;
 
-                System.Drawing.Image image = System.Drawing.Image.FromFile(loadedSprite);
-
-                Bitmap resultImage = new Bitmap(image.Width, newHeight);
-
-
-                // Добавление кадров с плавным движением вверх и вниз
-                for (int i = 1; i <= totalFrames; i++)
+                for (int i = 0; i < totalFrames; i++)
                 {
 
-                    // Вычисление позиции Y с учетом смещения
+
                     int currentOffsetY = 0;
-
-                    if (i >= 1 && i <= 15)
+                    if (i >= 0 && i <= totalFrames / 2)
                     {
-                        // Движение вверх
-                        currentOffsetY = offsetY * (15 - (i - 1));
+                        currentOffsetY = (offsetY / (totalFrames / 2)) * i;
                     }
-                    else if (i >= 16 && i <= 30)
+                    else if (i > totalFrames / 2 && i < totalFrames)
                     {
-                        // Движение вниз
-                        currentOffsetY = offsetY * (i - 15);
+                        currentOffsetY = (offsetY / (totalFrames / 2)) * (totalFrames - i);
                     }
 
-                    using (Graphics graphics = Graphics.FromImage(resultImage))
-                    {
-                        graphics.FillRectangle(new SolidBrush(System.Drawing.Color.White), new Rectangle(0, 0, resultImage.Width, resultImage.Height));
-                        graphics.DrawImage(image, 0, currentOffsetY);
-                    }
+
+                    MagickImage canvas = new MagickImage(MagickColors.Transparent, sourceImage.Width, sourceImage.Height * 2);
+                    MagickImage newFrameImage = (MagickImage)sourceImage.Clone();
+
+                    newFrameImage.BackgroundColor = MagickColors.Transparent;
+                    newFrameImage.Rotate(currentAngle);
+
+                    int drawX = (canvas.Width - newFrameImage.Width) / 2;
+                    int drawY = canvas.Height - newFrameImage.Height / 2 - sourceImage.Height / 2 - currentOffsetY;
+
+
+                    canvas.Composite(newFrameImage, drawX, drawY, CompositeOperator.Over);
+
                     // Добавление кадра в коллекцию
-                    frames.Add((MagickImage)App.ToMagickImage(resultImage));
+                    frames.Add(canvas);
                 }
 
                 // Установка задержки между кадрами
@@ -114,11 +109,10 @@ namespace SpriteGenerator.Pages
                 {
                     frame.AnimationDelay = animationDelay;
                 }
-
+                frames.Optimize();
+                frames.Coalesce();
                 // Сохранение GIF анимации
                 frames.Write(savingPath, MagickFormat.Gif);
-                resultImage.Dispose();
-                image.Dispose();
             }
             frames.Dispose();
             //}
@@ -130,187 +124,114 @@ namespace SpriteGenerator.Pages
 
         private void SaveFrontAnimation()
         {
-            //try
-            //{
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string savingPath = Path.Combine(desktopPath, Path.GetFileNameWithoutExtension(loadedSprite) + "_FrontFlip.gif");
             savingPath = App.GetNextFileName(savingPath);
 
-            // Создание коллекции кадров для анимации
             MagickImageCollection frames = new MagickImageCollection();
-
-            // Число кадров в анимации
-            int totalFrames = 30;
-
-            // Задержка между кадрами (в миллисекундах)
-            int animationDelay = 11; // Например, 100 мс
-
-            // Загрузка исходного изображения
             using (MagickImage sourceImage = new MagickImage(loadedSprite))
             {
-                // Расчет пикселей смещения для движения вверх и вниз
-                int offsetY = sourceImage.Height / 15;
-                int newHeight = sourceImage.Height + offsetY * 15;
-                int newWidth = sourceImage.Height;
-                sourceImage.Extent(newWidth, newHeight, Gravity.South, MagickColors.White);
-                // Добавление первого кадра (исходное изображение)
-                frames.Add(sourceImage.Clone());
-
-                System.Drawing.Image image = System.Drawing.Image.FromFile(loadedSprite);
-
-                Bitmap resultImage = new Bitmap(newWidth, newHeight);
-
-
-
                 float currentAngle = 0;
-                // Добавление кадров с плавным движением вверх и вниз
-                for (int i = 1; i <= totalFrames; i++)
+                var offsetY = sourceImage.Height;
+
+                for (int i = 0; i < totalFrames; i++)
                 {
-
-                    // Вычисление позиции Y с учетом смещения
-                    int currentOffsetY = 0;
-
-                    if (i >= 1 && i <= 15)
-                    {
-                        // Движение вверх
-                        currentOffsetY = offsetY * (15 - (i - 1));
-                    }
-                    else if (i >= 16 && i <= 30)
-                    {
-                        // Движение вниз
-                        currentOffsetY = offsetY * (i - 15);
-                    }
+                    MagickImage canvas = new MagickImage(MagickColors.Transparent, sourceImage.Height * 2, sourceImage.Height * 2);
+                    MagickImage newFrameImage = (MagickImage)sourceImage.Clone();
                     currentAngle = 360f / totalFrames * i;
 
-                    using (Graphics graphics = Graphics.FromImage(resultImage))
+                    int currentOffsetY = 0;
+                    int currentOffsetX = 0;
+
+                    if (i >= 0 && i <= totalFrames / 2)
                     {
-                        graphics.FillRectangle(new SolidBrush(System.Drawing.Color.White), new Rectangle(0, 0, resultImage.Width, resultImage.Height));
-
-                        //float centerX = resultImage.Width / 2;
-                        //float centerY = resultImage.Height - currentOffsetY - image.Height / 2 - offsetY * 15;
-                        float pivotX = resultImage.Width / 2;
-                        float pivotY = resultImage.Height - image.Height / 2;
-                        int correction = 0;
-
-                        graphics.TranslateTransform(pivotX, pivotY);
-                        graphics.RotateTransform(currentAngle);
-                        graphics.TranslateTransform(-pivotX, -pivotY);
-
-                        //graphics.TranslateTransform(centerX, centerY);
-                        //graphics.RotateTransform(currentAngle);
-                        //graphics.TranslateTransform(-centerX, -centerY);
-
-                        graphics.DrawImage(image, newWidth/2-image.Width/2, currentOffsetY);
+                        currentOffsetY = (offsetY / (totalFrames / 2)) * i;
                     }
-                    // Добавление кадра в коллекцию
-                    frames.Add((MagickImage)App.ToMagickImage(resultImage));
+                    else if (i > totalFrames / 2 && i < totalFrames)
+                    {
+                        currentOffsetY = (offsetY / (totalFrames / 2)) * (totalFrames - i);
+                    }
+
+                    currentOffsetX = ((canvas.Width - sourceImage.Width) / totalFrames) * i;
+
+
+                    newFrameImage.BackgroundColor = MagickColors.Transparent;
+                    newFrameImage.Rotate(currentAngle);
+
+                    int drawX = (canvas.Width  - newFrameImage.Width) / 2 - canvas.Width  / 2 + sourceImage.Width / 2 + currentOffsetX;
+                    int drawY =  canvas.Height - newFrameImage.Height / 2 - sourceImage.Height / 2 - currentOffsetY;
+
+
+                    canvas.Composite(newFrameImage, drawX, drawY, CompositeOperator.Over);
+
+                    frames.Add(canvas);
                 }
 
-                // Установка задержки между кадрами
                 foreach (MagickImage frame in frames)
                 {
                     frame.AnimationDelay = animationDelay;
                 }
-
-                // Сохранение GIF анимации
+                frames.Optimize();
+                frames.Coalesce();
                 frames.Write(savingPath, MagickFormat.Gif);
-                resultImage.Dispose();
-                image.Dispose();
             }
             frames.Dispose();
-            //}
-            //catch (ArgumentException)
-            //{
-            //    MessageBox.Show("Сначала загрузите изображение");
-            //}
         }
 
         private void SaveBackAnimation()
         {
-            //try
-            //{
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string savingPath = Path.Combine(desktopPath, Path.GetFileNameWithoutExtension(loadedSprite) + "_FrontFlip.gif");
+            string savingPath = Path.Combine(desktopPath, Path.GetFileNameWithoutExtension(loadedSprite) + "_BackFlip.gif");
             savingPath = App.GetNextFileName(savingPath);
 
-            // Создание коллекции кадров для анимации
             MagickImageCollection frames = new MagickImageCollection();
-
-            // Число кадров в анимации
-            int totalFrames = 30;
-
-            // Задержка между кадрами (в миллисекундах)
-            int animationDelay = 11; // Например, 100 мс
-
-            // Загрузка исходного изображения
             using (MagickImage sourceImage = new MagickImage(loadedSprite))
             {
-                // Расчет пикселей смещения для движения вверх и вниз
-                int offsetY = sourceImage.Height / 15;
-                int newHeight = sourceImage.Height + offsetY * 15;
-                int newWidth = sourceImage.Height;
-                sourceImage.Extent(newWidth, newHeight, Gravity.South, MagickColors.White);
-                // Добавление первого кадра (исходное изображение)
-                frames.Add(sourceImage.Clone());
+                float currentAngle = 0;
+                var offsetY = sourceImage.Height;
 
-                System.Drawing.Image image = System.Drawing.Image.FromFile(loadedSprite);
-
-                Bitmap resultImage = new Bitmap(newWidth, newHeight);
-
-
-                int currentAngle = 0;
-                // Добавление кадров с плавным движением вверх и вниз
-                for (int i = 1; i <= totalFrames; i++)
+                for (int i = 0; i <= totalFrames; i++)
                 {
+                    MagickImage canvas = new MagickImage(MagickColors.Transparent, sourceImage.Height * 2, sourceImage.Height * 2);
+                    MagickImage newFrameImage = (MagickImage)sourceImage.Clone();
+                    currentAngle = 360f / totalFrames * i;
 
-                    // Вычисление позиции Y с учетом смещения
                     int currentOffsetY = 0;
+                    int currentOffsetX = 0;
 
-                    if (i >= 1 && i <= 15)
+                    if (i >= 0 && i <= totalFrames / 2)
                     {
-                        // Движение вверх
-                        currentOffsetY = offsetY * (15 - (i - 1));
+                        currentOffsetY = (offsetY / (totalFrames / 2)) * i;
                     }
-                    else if (i >= 16 && i <= 30)
+                    else if (i > totalFrames / 2 && i < totalFrames)
                     {
-                        // Движение вниз
-                        currentOffsetY = offsetY * (i - 15);
+                        currentOffsetY = (offsetY / (totalFrames / 2)) * (totalFrames - i);
                     }
-                    currentAngle = 360 / totalFrames * i;
 
-                    using (Graphics graphics = Graphics.FromImage(resultImage))
-                    {
-                        graphics.FillRectangle(new SolidBrush(System.Drawing.Color.White), new Rectangle(0, 0, resultImage.Width, resultImage.Height));
+                    currentOffsetX = ((canvas.Width - sourceImage.Width) / totalFrames) * i;
 
-                        float centerX = newWidth;
-                        float centerY = currentOffsetY * image.Height / 2;
-                        graphics.TranslateTransform(centerX, centerY);
-                        graphics.RotateTransform(currentAngle);
-                        graphics.TranslateTransform(-centerX, -centerY);
 
-                        graphics.DrawImage(image, newWidth, currentOffsetY);
-                    }
-                    // Добавление кадра в коллекцию
-                    frames.Add((MagickImage)App.ToMagickImage(resultImage));
+                    newFrameImage.BackgroundColor = MagickColors.Transparent;
+                    newFrameImage.Rotate(-currentAngle);
+
+                    int drawX = (canvas.Width - newFrameImage.Width) / 2 + canvas.Width / 2 - sourceImage.Width / 2 - currentOffsetX;
+                    int drawY = canvas.Height - newFrameImage.Height / 2 - sourceImage.Height / 2 - currentOffsetY;
+
+
+                    canvas.Composite(newFrameImage, drawX, drawY, CompositeOperator.Over);
+
+                    frames.Add(canvas);
                 }
 
-                // Установка задержки между кадрами
                 foreach (MagickImage frame in frames)
                 {
                     frame.AnimationDelay = animationDelay;
                 }
-
-                // Сохранение GIF анимации
+                frames.Optimize();
+                frames.Coalesce();
                 frames.Write(savingPath, MagickFormat.Gif);
-                resultImage.Dispose();
-                image.Dispose();
             }
             frames.Dispose();
-            //}
-            //catch (ArgumentException)
-            //{
-            //    MessageBox.Show("Сначала загрузите изображение");
-            //}
         }
 
         string selectedAnimation = "";
@@ -351,6 +272,7 @@ namespace SpriteGenerator.Pages
         }
 
         BrushConverter bc = new BrushConverter();
+
         private void BtnChangeState(Button sender)
         {
             sender.Background = (System.Windows.Media.Brush)bc.ConvertFrom("#bee6fd");

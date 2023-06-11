@@ -160,10 +160,7 @@ namespace SpriteGenerator.Pages
             string fileName = SpriteName.Text + ".png";
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string savingPath = Path.Combine(desktopPath, fileName);
-
             savingPath = App.GetNextFileName(savingPath);
-
-
             try
             {
                 using (FileStream stream = new FileStream(savingPath, FileMode.Create))
@@ -187,13 +184,9 @@ namespace SpriteGenerator.Pages
             string savedPath = "../../SavedSprites/";
             string fileName = SpriteName.Text + ".png";
             string savingPath = Path.Combine(savedPath, fileName);
-
-
             savingPath = App.GetNextFileName(savingPath);
-
             var encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create((BitmapSource)Char.Source));
-
             try
             {
                 using (FileStream stream = new FileStream(savingPath, FileMode.Create))

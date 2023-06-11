@@ -20,36 +20,23 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0 25 0 0">
-            <TextBlock Text="Head"
-                       TextWrapping="Wrap" 
-                       FontSize="28"
-                       FontWeight="Bold"
-                       Foreground="White"
-                       TextAlignment="Center"/>
-            <StackPanel Grid.Row="0"
-                        Height="50"
-                        HorizontalAlignment="Center" 
-                        Orientation="Horizontal" 
-                        Margin="10,20">
-                <TextBlock Text="TemplateName" 
-                           x:Name="HeadName"
-                           TextWrapping="Wrap" 
-                           FontSize="24"
-                           FontWeight="Bold"
-                           Foreground="White"
+            <TextBlock Text="Head" TextWrapping="Wrap" FontWeight="Bold"
+                       Foreground="White" TextAlignment="Center"/>
+            <StackPanel Grid.Row="0" Height="50" HorizontalAlignment="Center" 
+                        Orientation="Horizontal" Margin="10,20">
+                <TextBlock Text="TemplateName" x:Name="HeadName"
+                           TextWrapping="Wrap" FontSize="24"
+                           FontWeight="Bold" Foreground="White"
                            TextAlignment="Center"/>
-                <Button Width="130"
-                        BorderThickness="0"
-                        FontSize="20"
-                        Name="UploadHead" 
-                        Margin="50 0 0 0" 
-                        Content="Upload File" 
-                        Click="UploadHead_Click"
+                <Button Width="200" BorderThickness="0" FontSize="20"
+                        Name="UploadHead" Margin="50 0 0 0" 
+                        Content="Загрузить файл" Click="UploadHead_Click"
                         Style="{DynamicResource ButtonStyle}"/>
             </StackPanel>
             <Image x:Name="HeadImageControl"
                    RenderOptions.BitmapScalingMode="NearestNeighbor"/>
         </StackPanel>
+        
         <StackPanel Grid.Row="1">
             <TextBlock Text="Body" 
                        TextWrapping="Wrap" 
@@ -68,12 +55,12 @@
                            FontWeight="Bold"
                            Foreground="White"
                            TextAlignment="Center"/>
-                <Button Width="130"
+                <Button Width="200" 
                         BorderThickness="0"
                         FontSize="20"
                         Name="UploadBody" 
                         Margin="50 0 0 0" 
-                        Content="Upload File" 
+                        Content="Загрузить файл" 
                         Click="UploadBody_Click"
                         Style="{DynamicResource ButtonStyle}" />
             </StackPanel>
@@ -98,10 +85,10 @@
                            FontWeight="Bold"
                            Foreground="White"
                            TextAlignment="Center"/>
-                <Button Width="130" 
+                <Button Width="200" 
                         Name="UploadLegs" 
                         Margin="50 0 0 0" 
-                        Content="Upload File" 
+                        Content="Загрузить файл" 
                         Click="UploadLegs_Click" 
                         BorderThickness="0"
                         FontSize="20"

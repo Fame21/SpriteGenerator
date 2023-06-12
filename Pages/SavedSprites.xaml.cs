@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -91,11 +92,13 @@ namespace SpriteGenerator.Pages
         private void PrevPage(object sender, RoutedEventArgs e)
         {
             currentPage = (currentPage - 2 + pageCount) % pageCount + 1;
+            UnselectSprite();
             LoadPage(currentPage);
         }
         private void NextPage(object sender, RoutedEventArgs e)
         {
             currentPage = (currentPage % pageCount) + 1;
+            UnselectSprite();
             LoadPage(currentPage);
         }
 
@@ -103,12 +106,19 @@ namespace SpriteGenerator.Pages
         {
             if (selected == null)
             {
+                MessageBox.Show("Выберите спрайт персонажа", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
             string idx = selected.Name.Substring(6);
             string name = ((TextBlock)this.FindName("Name" + idx)).Text;
             Image image = (Image)this.FindName("Pic" + idx);
+
+            if (image.Source == null)
+            {
+                MessageBox.Show("Выбрана пустая ячейка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
 
             string fileName = name + ".png";
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -126,12 +136,12 @@ namespace SpriteGenerator.Pages
                     encoder.Save(fileStream);
 
                 }
-                MessageBox.Show("Спрайт персонажа экпортирован на рабочий стол.");
+                MessageBox.Show("Спрайт персонажа экпортирован на рабочий стол.", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             catch (Exception exeption)
             {
-                MessageBox.Show(exeption.Message);
+                MessageBox.Show($"Непредвиденная ошибка: {exeption}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
         }

@@ -196,31 +196,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\New\puck-ovr.png" />
-    <Resource Include="Images\New\puck-th.png" />
-    <Resource Include="Images\New\redacted\body.png" />
-    <Resource Include="Images\New\redacted\head.png" />
-    <Resource Include="Images\New\redacted\legs.png" />
-    <Resource Include="Images\New\sara-ovr.png" />
-    <Resource Include="Images\New\star-bb.png" />
-    <Resource Include="Images\New\star-ftr.png" />
-    <Resource Include="Images\New\star-ovr.png" />
-    <Resource Include="Images\New\star-sm.png" />
-    <Resource Include="Images\New\trev-bb_0.png" />
-    <Resource Include="Images\New\trev-ftr.png" />
-    <Resource Include="Images\New\trev-ovr.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Bodies\classic.png" />
     <Resource Include="Images\Heads\classic.png" />
     <Resource Include="Images\Legs\classic.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\redacted\" />
     <Folder Include="Resources\" />
+    <Folder Include="SavedSprites\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="SavedSprites\default\default.png" />
+    <Resource Include="Images\Default\default.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Magick.NET-Q16-AnyCPU.13.1.2\build\netstandard20\Magick.NET-Q16-AnyCPU.targets" Condition="Exists('packages\Magick.NET-Q16-AnyCPU.13.1.2\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" />

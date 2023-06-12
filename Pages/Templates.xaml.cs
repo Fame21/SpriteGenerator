@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -18,14 +19,22 @@ namespace SpriteGenerator.Pages
             Loaded += LoadDefaultTemplates;
         }
 
-        private void ChangeImageControlSource(System.Windows.Controls.Image imageControl, string imagePath)
+        private void ChangeImageControlSource(Image imageControl, string imagePath)
         {
             //string[] filesEntries = Directory.GetFiles(imagePath);
             //string classicPath = Array.Find(filesEntries, file => Path.GetFileName(file) == "classic.png");
-            string fullPath = Path.GetFullPath(imagePath);
-            Uri uri = new Uri($"file:{fullPath}");
-            BitmapImage bitmap = new BitmapImage(uri);
-            imageControl.Source = bitmap;
+            try
+            {
+                string fullPath = Path.GetFullPath(imagePath);
+                Uri uri = new Uri($"file:{fullPath}");
+                BitmapImage bitmap = new BitmapImage(uri);
+                imageControl.Source = bitmap;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Непредвиденная ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
 
         }
         private void LoadDefaultTemplates(object sender, RoutedEventArgs e)
@@ -42,30 +51,44 @@ namespace SpriteGenerator.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Непредвиденная ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private string LoadStringFromDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PNG files (*.png)|*.png";
+            openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == true)
             {
                 return openFileDialog.FileName;
             }
-            else { return null; }
+            else
+            {
+                return null;
+            }
         }
         private void UploadHead_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                App.HeadsPath = LoadStringFromDialog();
-                ChangeImageControlSource(HeadImageControl, App.HeadsPath);
-                HeadName.Text = Path.GetFileNameWithoutExtension(App.HeadsPath);
+                var newFilePath = LoadStringFromDialog();
+                if (newFilePath != null)
+                {
+                    App.HeadsPath = newFilePath;
+                    ChangeImageControlSource(HeadImageControl, App.HeadsPath);
+                    HeadName.Text = Path.GetFileNameWithoutExtension(App.HeadsPath);
+                    return;
+                }
+                else
+                {
+                    return;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Непредвиденная ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -73,26 +96,46 @@ namespace SpriteGenerator.Pages
         {
             try
             {
-                App.BodiesPath = LoadStringFromDialog();
+                var newFilePath = LoadStringFromDialog();
+                if (newFilePath != null)
+                {
+                    App.BodiesPath = newFilePath;
                 ChangeImageControlSource(BodyImageControl, App.BodiesPath);
                 BodyName.Text = Path.GetFileNameWithoutExtension(App.BodiesPath);
+                    return;
+                }
+                else
+                {
+                    return;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Непредвиденная ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void UploadLegs_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                App.LegsPath = LoadStringFromDialog();
+                var newFilePath = LoadStringFromDialog();
+                if (newFilePath != null)
+                {
+                    App.LegsPath = newFilePath;
                 ChangeImageControlSource(LegsImageControl, App.LegsPath);
                 LegsName.Text = Path.GetFileNameWithoutExtension(App.LegsPath);
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+                return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Непредвиденная ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
     }

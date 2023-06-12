@@ -16,6 +16,7 @@ namespace SpriteGenerator.Pages
         private string loadedSprite = string.Empty;
         public AnimationPage()
         {
+            
             InitializeComponent();
         }
 
@@ -33,22 +34,34 @@ namespace SpriteGenerator.Pages
         private string LoadStringFromDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PNG files (*.png)|*.png";
+            openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == true)
             {
                 return openFileDialog.FileName;
             }
-            else { return null; }
+            else
+            {
+                return null;
+            }
         }
         private void UploadSprite_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                loadedSprite = LoadStringFromDialog();
+                var newFilePath = LoadStringFromDialog();
+                if (newFilePath == null)
+                {
+                    return;
+                }
+
+                loadedSprite = newFilePath;
                 ChangeImageControlSource(PreviewImageControl, loadedSprite);
                 SpriteNameControl.Content = Path.GetFileNameWithoutExtension(loadedSprite);
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Непредвиденная ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -190,7 +203,7 @@ namespace SpriteGenerator.Pages
                 float currentAngle = 0;
                 var offsetY = sourceImage.Height;
 
-                for (int i = 0; i <= totalFrames; i++)
+                for (int i = 0; i < totalFrames; i++)
                 {
                     MagickImage canvas = new MagickImage(MagickColors.Transparent, sourceImage.Height * 2, sourceImage.Height * 2);
                     MagickImage newFrameImage = (MagickImage)sourceImage.Clone();

@@ -21,6 +21,7 @@
 
         <StackPanel Grid.Row="0" Margin="0 25 0 0">
             <TextBlock Text="Head" TextWrapping="Wrap" FontWeight="Bold"
+                       FontSize="28"
                        Foreground="White" TextAlignment="Center"/>
             <StackPanel Grid.Row="0" Height="50" HorizontalAlignment="Center" 
                         Orientation="Horizontal" Margin="10,20">

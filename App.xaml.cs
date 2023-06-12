@@ -51,6 +51,7 @@ namespace SpriteGenerator
              * PixelWidth представляет ширину изображения в пикселях, а BitsPerPixel - количество битов на пиксель в формате изображения. 
              * Для вычисления ширины строки умножаем ширину изображения на количество байтов на пиксель и делим на 8.
              */
+
             int stride = (int)bitmapSource.PixelWidth * (bitmapSource.Format.BitsPerPixel / 8);
             byte[] pixels = new byte[(int)bitmapSource.PixelHeight * stride];
             bitmapSource.CopyPixels(pixels, stride, 0);
@@ -72,25 +73,25 @@ namespace SpriteGenerator
         }
 
         //head
-        public static int headX = 1;
-        public static int headY = 1;
+        public static int headX = 0;
+        public static int headY = 0;
         public static int headWidth = 25;
         public static int headHeight = 22;
 
         //body
-        public static int bodyX = 1;
-        public static int bodyY = 1;
+        public static int bodyX = 0;
+        public static int bodyY = 0;
         public static int bodyWidth = 25;
         public static int bodyHeight = 22;
 
         //legs
-        public static int legsX = 1;
-        public static int legsY = 1;
+        public static int legsX = 0;
+        public static int legsY = 0;
         public static int legsWidth = 15;
         public static int legsHeight = 17;
 
         //final size
-        public static int FinalWidth = 27;
-        public static int FinalHeight = 49;
+        public static int FinalWidth = 25;
+        public static int FinalHeight = 47;
     }
 }

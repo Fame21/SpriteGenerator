@@ -19,7 +19,7 @@
            
             <Image x:Name="PreviewImageControl"
                    MaxHeight="550"
-                   gif:ImageBehavior.AnimatedSource="\SavedSprites\default\default.png"
+                   Source="..\Images\Default\default.png"
                    RenderOptions.BitmapScalingMode="NearestNeighbor" Cursor=""/>
         </StackPanel>
 

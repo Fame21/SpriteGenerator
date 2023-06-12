@@ -46,6 +46,17 @@ namespace SpriteGenerator.Pages
             legs = new BitmapImage(new Uri(App.LegsPath, UriKind.Relative));
         }
 
+        private bool checkSize()
+        {
+            if ((int)head.Width % (int)headWidth != 0 || (int)head.Height != (int)headHeight)
+            { return false; }
+            if ((int)body.Width % (int)bodyWidth != 0 || (int)body.Height != (int)bodyHeight)
+            { return false; }
+            if ((int)legs.Width % (int)legsWidth != 0 || (int)legs.Height != (int)legsHeight)
+            { return false; }
+            return true;
+        }
+
         public Constructor()
         {
             InitializeComponent();
@@ -53,8 +64,10 @@ namespace SpriteGenerator.Pages
             Update();
         }
 
+
         private WriteableBitmap MergeParts()
         {
+
             WriteableBitmap amalgam = new WriteableBitmap(
                 27, // width
                 49, // height
@@ -68,13 +81,18 @@ namespace SpriteGenerator.Pages
             BitmapSource legsSource = null;
             try
             {
+                if (head.Format.ToString() != "Bgra32" || body.Format.ToString() != "Bgra32" || legs.Format.ToString() != "Bgra32")
+                { throw new Exception("Wrong format"); }
+                else if  (!checkSize())
+                { throw new Exception("Wrong size"); }
                 headSource = new CroppedBitmap(head, new Int32Rect(headX, headY, headWidth, headHeight));
                 bodySource = new CroppedBitmap(body, new Int32Rect(bodyX, bodyY, bodyWidth, bodyHeight));
                 legsSource = new CroppedBitmap(legs, new Int32Rect(legsX, legsY, legsWidth, legsHeight));
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Выбранные шаблоны не соответствуют необходимым размерам. Будут установлены стандартные шаблоны.");
+                MessageBox.Show($"Будут загружены стандартные шаблоны\nПроверьте размер загруженного изображения\nПроверте формат загруженного изображения\nТребуемый формат Bgra32", "Ошибка загрузки шаблона", MessageBoxButton.OK, MessageBoxImage.Warning);
                 App.ResetPaths();
                 SetTemplates();
                 headSource = new CroppedBitmap(head, new Int32Rect(headX, headY, headWidth, headHeight));
@@ -85,8 +103,8 @@ namespace SpriteGenerator.Pages
             byte[] headPixels = App.BitmapSourceToArray(headSource);
             byte[] bodyPixels = App.BitmapSourceToArray(bodySource);
             byte[] legsPixels = App.BitmapSourceToArray(legsSource);
-
             byte[] amalgamPixels = App.BitmapSourceToArray(amalgam);
+
             int amalgamPixelsIdx;
             int PixelsIdx;
             for (int i = 0; i < legsSource.PixelHeight; i++)
@@ -205,43 +223,43 @@ namespace SpriteGenerator.Pages
         // Next/prev buttons
         private void NextHead(object sender, RoutedEventArgs e)
         {
-            headX += headWidth + 1;
-            headX = headX % (head.PixelWidth - 1);
+            headX += headWidth;
+            headX = headX % (head.PixelWidth);
             Update();
         }
 
         private void NextBody(object sender, RoutedEventArgs e)
         {
-            bodyX += bodyWidth + 1;
-            bodyX = bodyX % (body.PixelWidth - 1);
+            bodyX += bodyWidth;
+            bodyX = bodyX % (body.PixelWidth);
             Update();
         }
 
         private void NextLegs(object sender, RoutedEventArgs e)
         {
-            legsX += legsWidth + 1;
-            legsX = legsX % (legs.PixelWidth - 1);
+            legsX += legsWidth;
+            legsX = legsX % (legs.PixelWidth);
             Update();
         }
 
         private void PrevLegs(object sender, RoutedEventArgs e)
         {
-            legsX -= legsWidth + 1;
-            legsX = (legsX + legs.PixelWidth - 1) % (legs.PixelWidth - 1);
+            legsX -= legsWidth;
+            legsX = (legsX + legs.PixelWidth) % (legs.PixelWidth);
             Update();
         }
 
         private void PrevBody(object sender, RoutedEventArgs e)
         {
-            bodyX -= bodyWidth + 1;
-            bodyX = (bodyX + body.PixelWidth - 1) % (body.PixelWidth - 1);
+            bodyX -= bodyWidth;
+            bodyX = (bodyX + body.PixelWidth) % (body.PixelWidth);
             Update();
         }
 
         private void PrevHead(object sender, RoutedEventArgs e)
         {
-            headX -= headWidth + 1;
-            headX = (headX + head.PixelWidth - 1) % (head.PixelWidth - 1);
+            headX -= headWidth;
+            headX = (headX + head.PixelWidth) % (head.PixelWidth);
             Update();
         }
     }

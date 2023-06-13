@@ -56,12 +56,25 @@ namespace SpriteGenerator.Pages
                 }
 
                 loadedSprite = newFilePath;
-                ChangeImageControlSource(PreviewImageControl, loadedSprite);
+                using (MagickImage sourceImage = new MagickImage(loadedSprite))
+                {
+                    if ((int)sourceImage.Height != 49 || (int)sourceImage.Width != 27)
+                    {
+                        loadedSprite = String.Empty;
+                        sourceImage.Dispose();
+                        throw new Exception();
+                        return;
+
+                    }
+                }
+
+                    ChangeImageControlSource(PreviewImageControl, loadedSprite);
                 SpriteNameControl.Content = Path.GetFileNameWithoutExtension(loadedSprite);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Непредвиденная ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Пожалуйста загрузите спрайт созданный в данном приложении", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
 
@@ -266,7 +279,7 @@ namespace SpriteGenerator.Pages
                 }
                 else
                 {
-                    MessageBox.Show("???");
+                    MessageBox.Show("Сначала выберите тип анимации");
                     return;
                 }
                 MessageBox.Show("Спрайт персонажа экпортирован на рабочий стол.");
